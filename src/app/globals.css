@@ -134,6 +134,14 @@ html::-webkit-scrollbar {
   display: none; /* Chromium / Safari */
 }
 
+/* Reusable: hide an element's scrollbar while keeping it scrollable. */
+.no-scrollbar {
+  scrollbar-width: none; /* Firefox */
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none; /* Chromium / Safari */
+}
+
 /*
  * Theme-change reveal. The toggle wraps the swap in the View Transitions API and
  * animates a clip-path circle growing from the toggle (top-right). Disable the
