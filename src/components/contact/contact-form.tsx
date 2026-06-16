@@ -88,9 +88,9 @@ export function ContactForm() {
         <Label htmlFor="message">Message</Label>
         <Textarea
           id="message"
-          rows={4}
           placeholder="Type your message here..."
           aria-invalid={Boolean(errors.message)}
+          className="field-sizing-fixed h-48 resize-none"
           {...register("message")}
         />
         {errors.message && (
@@ -104,7 +104,7 @@ export function ContactForm() {
         className="w-full"
         disabled={mutation.isPending}
       >
-        {mutation.isPending ? "Sending..." : "Drop a text"}
+        {mutation.isPending ? "Sending..." : "Drop a message"}
       </Button>
     </form>
   );
