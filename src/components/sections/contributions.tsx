@@ -1,6 +1,7 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
+import { useTheme } from "next-themes";
 import {
   ActivityCalendar,
   type Activity,
@@ -12,10 +13,11 @@ import { Section } from "@/components/layout/section";
 import { github } from "@/data/github";
 import { formatLongDate } from "@/lib/date";
 
-// GitHub-style green ramp (level 0 → 4). Index 0 reuses a muted tone so empty
-// cells blend with the dark canvas. Shared by the calendar theme and legend.
-const RAMP = ["#161b24", "#0e4429", "#006d32", "#26a641", "#39d353"];
-const calendarTheme: ThemeInput = { light: RAMP, dark: RAMP };
+// GitHub green ramps (level 0 → 4). Index 0 is the empty cell, tinted to each
+// theme's muted tone so it blends in; the rest are GitHub's own green scales.
+const RAMP_DARK = ["#26241c", "#0e4429", "#006d32", "#26a641", "#39d353"];
+const RAMP_LIGHT = ["#e2ded2", "#9be9a8", "#40c463", "#30a14e", "#216e39"];
+const calendarTheme: ThemeInput = { light: RAMP_LIGHT, dark: RAMP_DARK };
 
 const GITHUB_URL = `https://github.com/${github.username}`;
 
@@ -26,12 +28,12 @@ async function fetchContributions(): Promise<Activity[]> {
   return res.json();
 }
 
-/** GitHub-style "Less ▢▢▢▢▢ More" color legend. */
-function ContributionLegend() {
+/** GitHub-style "Less ▢▢▢▢▢ More" legend, using the active theme's ramp. */
+function ContributionLegend({ ramp }: { ramp: string[] }) {
   return (
     <div className="flex items-center gap-1 text-xs text-muted-foreground">
       <span className="mr-1">Less</span>
-      {RAMP.map((color) => (
+      {ramp.map((color) => (
         <span
           key={color}
           className="size-2.5 rounded-[2px]"
@@ -46,9 +48,9 @@ function ContributionLegend() {
 /**
  * GitHub Contributions — a yearly heatmap with per-day hover tooltips. Data is
  * fetched through React Query (server route → useQuery) so loading/error/caching
- * are handled consistently with the rest of the app. Tooltips are built into
- * react-activity-calendar (positioned by floating-ui); the footer mirrors
- * GitHub's "N contributions in <year>" line plus a Less/More legend.
+ * are handled consistently with the rest of the app. The ramp + tooltip recolor
+ * with the active theme; the footer mirrors GitHub's "N contributions in <year>"
+ * line plus a Less/More legend.
  */
 export function Contributions() {
   const { data, isPending, isError } = useQuery({
@@ -75,6 +77,10 @@ export function Contributions() {
 
 /** The calendar + footer, rendered once data is available. */
 function ContributionGraph({ data }: { data: Activity[] }) {
+  const { resolvedTheme } = useTheme();
+  const isLight = resolvedTheme === "light";
+  const ramp = isLight ? RAMP_LIGHT : RAMP_DARK;
+
   const total = data.reduce((sum, day) => sum + day.count, 0);
   // jogruber returns ascending dates, so the first entry is the window's start.
   const year = Number(data[0].date.slice(0, 4));
@@ -85,7 +91,7 @@ function ContributionGraph({ data }: { data: Activity[] }) {
         <ActivityCalendar
           data={data}
           theme={calendarTheme}
-          colorScheme="dark"
+          colorScheme={isLight ? "light" : "dark"}
           blockSize={11}
           blockMargin={3}
           fontSize={12}
@@ -114,7 +120,7 @@ function ContributionGraph({ data }: { data: Activity[] }) {
             GitHub
           </a>
         </p>
-        <ContributionLegend />
+        <ContributionLegend ramp={ramp} />
       </div>
     </>
   );
