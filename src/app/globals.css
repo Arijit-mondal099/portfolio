@@ -1,0 +1,96 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/*
+ * Enable the `dark:` utility variant whenever an ancestor has the `.dark`
+ * class. The site is dark-only (see the reference design), so we set
+ * `class="dark"` on <html> and define the palette once below.
+ */
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Design tokens — a terminal/developer aesthetic: near-black navy canvas,
+ * off-white text, muted gray sub-text, and subtle hairline borders.
+ * Values are shared by `:root` and `.dark` so component `dark:` variants and
+ * the base tokens resolve to the same dark theme.
+ */
+:root,
+.dark {
+  --radius: 0.625rem;
+
+  --background: #0b0e14; /* page canvas */
+  --foreground: #e5e7eb; /* primary text */
+
+  --card: #11151d; /* project cards / raised surfaces */
+  --card-foreground: #e5e7eb;
+
+  --popover: #11151d;
+  --popover-foreground: #e5e7eb;
+
+  /* Light "chip" surface — used by skill badges & the primary CTA */
+  --primary: #f5f5f5;
+  --primary-foreground: #0b0e14;
+
+  --secondary: #1a1f2b;
+  --secondary-foreground: #e5e7eb;
+
+  --muted: #161b24;
+  --muted-foreground: #8b95a5; /* taglines, captions, secondary copy */
+
+  --accent: #1a1f2b;
+  --accent-foreground: #e5e7eb;
+
+  --destructive: #ef4444;
+  --destructive-foreground: #fafafa;
+
+  --border: #1f2430; /* hairline borders on cards, buttons, inputs */
+  --input: #1f2430;
+  --ring: #3b4252; /* focus ring */
+}
+
+/*
+ * Map raw tokens to Tailwind's theme so utilities like `bg-background`,
+ * `text-muted-foreground`, `border-border`, and `rounded-md` are generated.
+ * `--font-jetbrains-mono` is injected by next/font in `layout.tsx`; the whole
+ * site uses it (mono everywhere) so both sans and mono point at it.
+ */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --font-sans: var(--font-jetbrains-mono);
+  --font-mono: var(--font-jetbrains-mono);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+@layer base {
+  /* Sensible defaults: every element borrows the themed border + focus ring. */
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background font-mono text-foreground antialiased;
+  }
+}
