@@ -31,12 +31,12 @@ export function ResumeDialog() {
 
       <DialogContent className="sm:max-w-3xl">
         <DialogHeader>
-          <DialogTitle>Résumé</DialogTitle>
+          <DialogTitle>Resume</DialogTitle>
         </DialogHeader>
 
         <iframe
           src={profile.resumeUrl}
-          title="Résumé"
+          title="Resume"
           className="h-[70vh] w-full rounded-md border border-border"
         />
 
