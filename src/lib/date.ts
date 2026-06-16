@@ -10,6 +10,30 @@ export function formatMonthYear(value: string): string {
   return `${month}.${year}`;
 }
 
+const MONTHS_SHORT = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
+];
+
+/**
+ * `"2025-06-15"` → `"Jun 15, 2025"`. Parsed manually rather than via `new Date`,
+ * which would read the string as UTC midnight and can shift a day in local time.
+ */
+export function formatLongDate(value: string): string {
+  const [year, month, day] = value.split("-").map(Number);
+  return `${MONTHS_SHORT[month - 1]} ${day}, ${year}`;
+}
+
 /** `("2020-07", "2024-05")` → `"07.2020 – 05.2024"` (present end → `"∞"`). */
 export function formatRange(start: string, end: string | null): string {
   const endLabel = end ? formatMonthYear(end) : "∞";

@@ -94,3 +94,21 @@
     @apply bg-background font-mono text-foreground antialiased;
   }
 }
+
+/*
+ * react-activity-calendar's tooltip flips to a light background under
+ * `colorScheme="dark"`. Override it to the themed popover (dark) so the
+ * contribution tooltips match the rest of the UI. The `html` prefix wins over
+ * the library's stylesheet regardless of load order.
+ */
+html .react-activity-calendar__tooltip[data-color-scheme="dark"] {
+  background-color: var(--popover);
+  color: var(--popover-foreground);
+  border: 1px solid var(--border);
+  font-family: var(--font-mono);
+}
+html
+  .react-activity-calendar__tooltip[data-color-scheme="dark"]
+  .react-activity-calendar__tooltip-arrow {
+  fill: var(--popover);
+}
