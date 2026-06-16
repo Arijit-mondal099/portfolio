@@ -1,3 +1,4 @@
+import { FileText, Mail } from "lucide-react";
 import Image from "next/image";
 
 import { buttonVariants } from "@/components/ui/button";
@@ -29,6 +30,7 @@ export function Hero() {
             href={profile.contactHref}
             className={cn(buttonVariants({ variant: "outline" }), "uppercase")}
           >
+            <Mail />
             Contact me
           </a>
           <a
@@ -37,6 +39,7 @@ export function Hero() {
             rel="noopener noreferrer"
             className={cn(buttonVariants({ variant: "outline" }), "uppercase")}
           >
+            <FileText />
             Resume
           </a>
         </div>
