@@ -3,49 +3,80 @@
 
 /*
  * Enable the `dark:` utility variant whenever an ancestor has the `.dark`
- * class. The site is dark-only (see the reference design), so we set
- * `class="dark"` on <html> and define the palette once below.
+ * class. next-themes toggles `class="light"` / `class="dark"` on <html>.
  */
 @custom-variant dark (&:is(.dark *));
 
 /*
- * Design tokens — a terminal/developer aesthetic: near-black navy canvas,
- * off-white text, muted gray sub-text, and subtle hairline borders.
- * Values are shared by `:root` and `.dark` so component `dark:` variants and
- * the base tokens resolve to the same dark theme.
+ * Design tokens — a warm, paper-like palette (terminal/mono aesthetic).
+ * `:root` is the light theme; `.dark` overrides it for dark mode. Order
+ * matters: `.dark` comes after `:root` so it wins when both match.
  */
-:root,
-.dark {
+:root {
   --radius: 0.625rem;
+  color-scheme: light;
 
-  --background: #0b0e14; /* page canvas */
-  --foreground: #e5e7eb; /* primary text */
+  --background: #ece9e1; /* warm cream canvas */
+  --foreground: #1b1a17; /* warm near-black text */
 
-  --card: #11151d; /* project cards / raised surfaces */
-  --card-foreground: #e5e7eb;
+  --card: #e5e1d7; /* raised surfaces */
+  --card-foreground: #1b1a17;
 
-  --popover: #11151d;
-  --popover-foreground: #e5e7eb;
+  --popover: #ece9e1;
+  --popover-foreground: #1b1a17;
 
-  /* Light "chip" surface — used by skill badges & the primary CTA */
-  --primary: #f5f5f5;
-  --primary-foreground: #0b0e14;
+  /* "chip" surface — skill badges & the primary CTA (dark on light) */
+  --primary: #1b1a17;
+  --primary-foreground: #ece9e1;
 
-  --secondary: #1a1f2b;
-  --secondary-foreground: #e5e7eb;
+  --secondary: #e0dccf;
+  --secondary-foreground: #1b1a17;
 
-  --muted: #161b24;
-  --muted-foreground: #8b95a5; /* taglines, captions, secondary copy */
+  --muted: #e2ded2;
+  --muted-foreground: #6e6a60; /* taglines, captions, secondary copy */
 
-  --accent: #1a1f2b;
-  --accent-foreground: #e5e7eb;
+  --accent: #e0dccf;
+  --accent-foreground: #1b1a17;
+
+  --destructive: #b3261e;
+  --destructive-foreground: #ece9e1;
+
+  --border: #d7d2c5; /* hairline borders on cards, buttons, inputs */
+  --input: #d7d2c5;
+  --ring: #b8b2a2; /* focus ring */
+}
+
+.dark {
+  color-scheme: dark;
+
+  --background: #1b1a17; /* warm near-black canvas */
+  --foreground: #e8e6de; /* warm cream text */
+
+  --card: #232218;
+  --card-foreground: #e8e6de;
+
+  --popover: #232218;
+  --popover-foreground: #e8e6de;
+
+  /* "chip" surface — light on dark */
+  --primary: #e8e6de;
+  --primary-foreground: #1b1a17;
+
+  --secondary: #2a2820;
+  --secondary-foreground: #e8e6de;
+
+  --muted: #26241c;
+  --muted-foreground: #9a968b;
+
+  --accent: #2a2820;
+  --accent-foreground: #e8e6de;
 
   --destructive: #ef4444;
   --destructive-foreground: #fafafa;
 
-  --border: #1f2430; /* hairline borders on cards, buttons, inputs */
-  --input: #1f2430;
-  --ring: #3b4252; /* focus ring */
+  --border: #322f26;
+  --input: #322f26;
+  --ring: #4a4636;
 }
 
 /*
@@ -96,17 +127,19 @@
 }
 
 /*
- * react-activity-calendar's tooltip flips to a light background under
- * `colorScheme="dark"`. Override it to the themed popover (dark) so the
- * contribution tooltips match the rest of the UI. The `html` prefix wins over
- * the library's stylesheet regardless of load order.
+ * react-activity-calendar ships its own tooltip colors (and flips them under
+ * `colorScheme="dark"`). Override both schemes to the themed popover — which
+ * adapts per mode — so the contribution tooltip always matches the UI. The
+ * `html` prefix raises specificity enough to win regardless of load order.
  */
+html .react-activity-calendar__tooltip,
 html .react-activity-calendar__tooltip[data-color-scheme="dark"] {
   background-color: var(--popover);
   color: var(--popover-foreground);
   border: 1px solid var(--border);
   font-family: var(--font-mono);
 }
+html .react-activity-calendar__tooltip .react-activity-calendar__tooltip-arrow,
 html
   .react-activity-calendar__tooltip[data-color-scheme="dark"]
   .react-activity-calendar__tooltip-arrow {
