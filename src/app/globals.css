@@ -126,6 +126,14 @@
   }
 }
 
+/* Hide the page scrollbar (scrolling still works via wheel/touch/keyboard). */
+html {
+  scrollbar-width: none; /* Firefox */
+}
+html::-webkit-scrollbar {
+  display: none; /* Chromium / Safari */
+}
+
 /*
  * Theme-change reveal. The toggle wraps the swap in the View Transitions API and
  * animates a clip-path circle growing from the toggle (top-right). Disable the
