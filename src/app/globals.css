@@ -134,11 +134,17 @@ html::-webkit-scrollbar {
   display: none; /* Chromium / Safari */
 }
 
-/* Reusable: hide an element's scrollbar while keeping it scrollable. */
-.no-scrollbar {
+/*
+ * Hide a scrollbar while keeping the element scrollable. `.no-scrollbar` is a
+ * reusable helper; react-activity-calendar scrolls the heatmap in its own
+ * internal container (inline `overflow-x: auto`), so target that too.
+ */
+.no-scrollbar,
+.react-activity-calendar__scroll-container {
   scrollbar-width: none; /* Firefox */
 }
-.no-scrollbar::-webkit-scrollbar {
+.no-scrollbar::-webkit-scrollbar,
+.react-activity-calendar__scroll-container::-webkit-scrollbar {
   display: none; /* Chromium / Safari */
 }
 
