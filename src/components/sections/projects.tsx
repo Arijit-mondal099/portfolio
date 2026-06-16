@@ -32,7 +32,7 @@ export function Projects() {
         ) : null
       }
     >
-      <ProjectGrid projects={featured} columns={2} />
+      <ProjectGrid projects={featured} />
     </Section>
   );
 }

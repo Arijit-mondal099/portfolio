@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 /** /projects — the full listing of every project in the shared card grid. */
 export default function ProjectsPage() {
   return (
-    <main className="mx-auto w-full max-w-4xl flex-1 px-6 py-16 sm:py-24">
+    <main className="mx-auto w-full max-w-2xl flex-1 px-6 py-16 sm:py-24">
       <Link
         href="/"
         className="inline-flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
