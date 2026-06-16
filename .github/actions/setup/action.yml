@@ -1,0 +1,33 @@
+name: Setup
+description: Install Node, pnpm (via Corepack) and project dependencies
+
+runs:
+  using: composite
+  steps:
+    - name: Install Node
+      uses: actions/setup-node@v4
+      with:
+        node-version-file: .nvmrc
+
+    # Corepack ships with Node and provisions the pnpm version pinned in
+    # package.json's `packageManager` field. This avoids pnpm/action-setup's
+    # self-installer, which fails on pnpm v11.
+    - name: Enable Corepack
+      run: corepack enable
+      shell: bash
+
+    - name: Resolve pnpm store path
+      id: store
+      run: echo "path=$(pnpm store path)" >> "$GITHUB_OUTPUT"
+      shell: bash
+
+    - name: Cache pnpm store
+      uses: actions/cache@v4
+      with:
+        path: ${{ steps.store.outputs.path }}
+        key: pnpm-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
+        restore-keys: pnpm-${{ runner.os }}-
+
+    - name: Install dependencies
+      run: pnpm install --frozen-lockfile
+      shell: bash
