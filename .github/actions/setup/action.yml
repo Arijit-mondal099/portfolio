@@ -1,0 +1,20 @@
+name: Setup
+description: Install pnpm, Node and project dependencies (with caching)
+
+runs:
+  using: composite
+  steps:
+    # pnpm must be set up before setup-node so its cache can be keyed on pnpm.
+    # The version comes from the `packageManager` field in package.json.
+    - name: Install pnpm
+      uses: pnpm/action-setup@v4
+
+    - name: Install Node
+      uses: actions/setup-node@v4
+      with:
+        node-version-file: .nvmrc
+        cache: pnpm
+
+    - name: Install dependencies
+      run: pnpm install --frozen-lockfile
+      shell: bash
