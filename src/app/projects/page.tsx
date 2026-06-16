@@ -6,7 +6,7 @@ import { ProjectGrid } from "@/components/projects/project-grid";
 import { projects } from "@/data/projects";
 
 export const metadata: Metadata = {
-  title: "Projects — Arijit Mondal",
+  title: "Projects",
   description: "A complete list of projects built by Arijit Mondal.",
 };
 
