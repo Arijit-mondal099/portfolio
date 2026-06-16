@@ -39,6 +39,3 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-
-# local AI assistant guidance (not part of the portfolio)
-CLAUDE.md
