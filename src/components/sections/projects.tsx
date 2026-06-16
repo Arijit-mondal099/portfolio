@@ -1,80 +1,34 @@
-import { Code2, ExternalLink, type LucideIcon } from "lucide-react";
-import Image from "next/image";
+import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 import { Section } from "@/components/layout/section";
-import { Card, CardContent, CardFooter } from "@/components/ui/card";
-import { projects, type Project } from "@/data/projects";
+import { ProjectGrid } from "@/components/projects/project-grid";
+import { projects } from "@/data/projects";
 
-/** A single Demo/Source link with a leading icon. */
-function ProjectLink({
-  href,
-  icon: Icon,
-  label,
-}: {
-  href: string;
-  icon: LucideIcon;
-  label: string;
-}) {
-  return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="inline-flex items-center gap-1.5 text-xs text-muted-foreground transition-colors hover:text-foreground"
-    >
-      <Icon className="size-3.5" />
-      {label}
-    </a>
-  );
-}
+// How many projects to preview on the home page (one row). The rest live on
+// the dedicated /projects page.
+const FEATURED_COUNT = 3;
 
 /**
- * One project card: a flush thumbnail (the Card rounds/trims a first-child
- * <img>), the description, and a footer of optional Demo/Source links.
- * `h-full` + `flex-1` content keep cards in a row the same height.
+ * Projects — a one-row preview of featured projects with a link to the full
+ * /projects listing. The grid itself is shared via <ProjectGrid>.
  */
-function ProjectCard({ project }: { project: Project }) {
-  return (
-    <Card className="h-full">
-      <Image
-        src={project.image}
-        alt={project.title}
-        width={600}
-        height={375}
-        className="aspect-[16/10] w-full object-cover"
-      />
-      <CardContent className="flex-1">
-        <p className="leading-relaxed text-muted-foreground">
-          {project.description}
-        </p>
-      </CardContent>
-      {(project.demoUrl || project.sourceUrl) && (
-        <CardFooter className="gap-4">
-          {project.demoUrl && (
-            <ProjectLink
-              href={project.demoUrl}
-              icon={ExternalLink}
-              label="Demo"
-            />
-          )}
-          {project.sourceUrl && (
-            <ProjectLink href={project.sourceUrl} icon={Code2} label="Source" />
-          )}
-        </CardFooter>
-      )}
-    </Card>
-  );
-}
-
-/** Projects — a responsive grid of project cards (1 / 2 / 3 columns). */
 export function Projects() {
+  const featured = projects.slice(0, FEATURED_COUNT);
+
   return (
     <Section id="projects" heading="Projects">
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {projects.map((project) => (
-          <ProjectCard key={project.title} project={project} />
-        ))}
-      </div>
+      <ProjectGrid projects={featured} />
+
+      {projects.length > FEATURED_COUNT && (
+        <Link
+          href="/projects"
+          className="mt-6 inline-flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
+        >
+          View all projects
+          <ArrowRight className="size-4" />
+        </Link>
+      )}
     </Section>
   );
 }
