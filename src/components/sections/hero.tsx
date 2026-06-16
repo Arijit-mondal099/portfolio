@@ -1,6 +1,7 @@
-import { FileText, Mail } from "lucide-react";
+import { Mail } from "lucide-react";
 import Image from "next/image";
 
+import { ResumeDialog } from "@/components/resume-dialog";
 import { buttonVariants } from "@/components/ui/button";
 import { profile } from "@/data/profile";
 import { cn } from "@/lib/utils";
@@ -33,15 +34,7 @@ export function Hero() {
             <Mail />
             Contact me
           </a>
-          <a
-            href={profile.resumeUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={cn(buttonVariants({ variant: "outline" }), "uppercase")}
-          >
-            <FileText />
-            Resume
-          </a>
+          <ResumeDialog />
         </div>
       </div>
 
