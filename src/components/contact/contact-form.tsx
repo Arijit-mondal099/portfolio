@@ -90,7 +90,7 @@ export function ContactForm() {
           id="message"
           placeholder="Type your message here..."
           aria-invalid={Boolean(errors.message)}
-          className="field-sizing-fixed h-48 resize-none"
+          className="field-sizing-fixed h-36 resize-none"
           {...register("message")}
         />
         {errors.message && (
