@@ -18,6 +18,10 @@ export interface Profile {
   resumeUrl: string;
   /** In-page anchor to the contact section. */
   contactHref: string;
+  /** Short lead-in shown above the contact links. */
+  contactNote: string;
+  /** Availability status shown as a badge by the contact heading. */
+  availability: string;
 }
 
 export const profile: Profile = {
@@ -31,4 +35,8 @@ export const profile: Profile = {
   avatar: { src: "/profile.png", alt: "Arijit Mondal" },
   resumeUrl: "/resume.pdf",
   contactHref: "#contact",
+  contactNote:
+    "Have a project in mind, a question, or just want to say hi? Drop a " +
+    "message — or reach out on any of these.",
+  availability: "Open to opportunities",
 };
