@@ -127,6 +127,24 @@
 }
 
 /*
+ * Theme-change reveal. The toggle wraps the swap in the View Transitions API and
+ * animates a clip-path circle growing from the toggle (top-right). Disable the
+ * default cross-fade so only the new theme's circular reveal plays, and stack
+ * the incoming theme on top so it wipes over the outgoing one.
+ */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+::view-transition-old(root) {
+  z-index: 1;
+}
+::view-transition-new(root) {
+  z-index: 9999;
+}
+
+/*
  * react-activity-calendar ships its own tooltip colors (and flips them under
  * `colorScheme="dark"`). Override both schemes to the themed popover — which
  * adapts per mode — so the contribution tooltip always matches the UI. The
