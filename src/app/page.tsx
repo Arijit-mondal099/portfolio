@@ -1,14 +1,14 @@
 import { About } from "@/components/sections/about";
 import { Contributions } from "@/components/sections/contributions";
 import { Hero } from "@/components/sections/hero";
+import { Projects } from "@/components/sections/projects";
 import { Skills } from "@/components/sections/skills";
 
 /**
  * Home page — composes the portfolio sections in order.
  *
  * The page is a single centered column (the reference is a focused, one-column
- * layout). Remaining sections (Projects, Contact, Footer) are added in later
- * phases.
+ * layout). Remaining sections (Contact, Footer) are added in later phases.
  */
 export default function Home() {
   return (
@@ -17,6 +17,7 @@ export default function Home() {
       <About />
       <Contributions />
       <Skills />
+      <Projects />
     </main>
   );
 }
