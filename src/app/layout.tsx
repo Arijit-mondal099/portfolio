@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import { Providers } from "./providers";
 
 /*
  * JetBrains Mono drives the entire UI — the reference uses a monospace,
@@ -28,7 +29,9 @@ export default function RootLayout({
   // the `dark:` variants baked into the shadcn/ui components.
   return (
     <html lang="en" className={`${jetbrainsMono.variable} dark h-full`}>
-      <body className="flex min-h-full flex-col">{children}</body>
+      <body className="flex min-h-full flex-col">
+        <Providers>{children}</Providers>
+      </body>
     </html>
   );
 }
