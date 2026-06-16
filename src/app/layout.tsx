@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Footer } from "@/components/layout/footer";
+import { SiteHeader } from "@/components/layout/site-header";
 import { Toaster } from "@/components/ui/sonner";
 import { siteUrl } from "@/lib/site";
 import { Providers } from "./providers";
@@ -62,19 +63,25 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // `dark` is hard-coded because the design is dark-only; this also activates
-  // the `dark:` variants baked into the shadcn/ui components.
+  // next-themes sets the theme class on <html>; suppressHydrationWarning
+  // silences the expected mismatch from that pre-paint class swap.
   return (
     <html
       lang="en"
-      className={`${jetbrainsMono.variable} dark h-full motion-safe:scroll-smooth`}
+      suppressHydrationWarning
+      className={`${jetbrainsMono.variable} h-full motion-safe:scroll-smooth`}
     >
       <body className="flex min-h-full flex-col">
-        <Providers>{children}</Providers>
-        <Footer />
-        {/* Toast notifications (e.g. contact form feedback). Forced dark to
-            match the dark-only theme since there's no next-themes provider. */}
-        <Toaster theme="dark" />
+        {/* Providers (theme + query) wrap the chrome so the toggle and toasts
+            get theme context. The providers add no DOM, so the flex layout is
+            preserved. */}
+        <Providers>
+          <SiteHeader />
+          {children}
+          <Footer />
+          {/* Toasts follow the active theme (sonner reads next-themes). */}
+          <Toaster />
+        </Providers>
       </body>
     </html>
   );
