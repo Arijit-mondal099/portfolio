@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import { Footer } from "@/components/layout/footer";
 import { Toaster } from "@/components/ui/sonner";
 import { Providers } from "./providers";
 
@@ -32,6 +33,7 @@ export default function RootLayout({
     <html lang="en" className={`${jetbrainsMono.variable} dark h-full`}>
       <body className="flex min-h-full flex-col">
         <Providers>{children}</Providers>
+        <Footer />
         {/* Toast notifications (e.g. contact form feedback). Forced dark to
             match the dark-only theme since there's no next-themes provider. */}
         <Toaster theme="dark" />
