@@ -126,6 +126,28 @@
   }
 }
 
+/* Hide the page scrollbar (scrolling still works via wheel/touch/keyboard). */
+html {
+  scrollbar-width: none; /* Firefox */
+}
+html::-webkit-scrollbar {
+  display: none; /* Chromium / Safari */
+}
+
+/*
+ * Hide a scrollbar while keeping the element scrollable. `.no-scrollbar` is a
+ * reusable helper; react-activity-calendar scrolls the heatmap in its own
+ * internal container (inline `overflow-x: auto`), so target that too.
+ */
+.no-scrollbar,
+.react-activity-calendar__scroll-container {
+  scrollbar-width: none; /* Firefox */
+}
+.no-scrollbar::-webkit-scrollbar,
+.react-activity-calendar__scroll-container::-webkit-scrollbar {
+  display: none; /* Chromium / Safari */
+}
+
 /*
  * Theme-change reveal. The toggle wraps the swap in the View Transitions API and
  * animates a clip-path circle growing from the toggle (top-right). Disable the

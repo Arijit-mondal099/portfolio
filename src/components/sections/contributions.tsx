@@ -87,7 +87,7 @@ function ContributionGraph({ data }: { data: Activity[] }) {
 
   return (
     <>
-      <div className="overflow-x-auto pb-2 text-muted-foreground">
+      <div className="no-scrollbar overflow-x-auto pb-2 text-muted-foreground">
         <ActivityCalendar
           data={data}
           theme={calendarTheme}
