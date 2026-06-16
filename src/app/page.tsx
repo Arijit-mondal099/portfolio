@@ -1,6 +1,7 @@
 import { About } from "@/components/sections/about";
 import { Contact } from "@/components/sections/contact";
 import { Contributions } from "@/components/sections/contributions";
+import { EducationExperience } from "@/components/sections/education-experience";
 import { Hero } from "@/components/sections/hero";
 import { Projects } from "@/components/sections/projects";
 import { Skills } from "@/components/sections/skills";
@@ -16,6 +17,7 @@ export default function Home() {
     <main className="mx-auto w-full max-w-2xl flex-1 space-y-16 px-6 py-16 sm:py-24">
       <Hero />
       <About />
+      <EducationExperience />
       <Contributions />
       <Skills />
       <Projects />
