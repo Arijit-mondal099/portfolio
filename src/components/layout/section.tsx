@@ -27,7 +27,10 @@ export function Section({
   return (
     <section id={id} className={cn("scroll-mt-16", className)} {...props}>
       <div className="mb-5 flex items-center justify-between gap-4">
-        <Reveal as="h2" className="text-2xl font-bold tracking-tight">
+        <Reveal
+          as="h2"
+          className="font-(family-name:--font-heading) text-2xl font-bold tracking-tight"
+        >
           {heading}
         </Reveal>
         {action}
