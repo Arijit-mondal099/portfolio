@@ -5,6 +5,7 @@ import {
   QueryClient,
   QueryClientProvider,
 } from "@tanstack/react-query";
+import { MotionConfig } from "motion/react";
 import { ThemeProvider } from "next-themes";
 
 /**
@@ -49,7 +50,13 @@ export function Providers({ children }: { children: React.ReactNode }) {
       enableSystem
       disableTransitionOnChange
     >
-      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+      <QueryClientProvider client={queryClient}>
+        {/* `reducedMotion="user"` disables transform/layout animations under
+            `prefers-reduced-motion: reduce` while keeping opacity, so every
+            motion primitive degrades to a quiet fade with no per-component
+            handling. MotionConfig renders no DOM, so the layout is unaffected. */}
+        <MotionConfig reducedMotion="user">{children}</MotionConfig>
+      </QueryClientProvider>
     </ThemeProvider>
   );
 }
