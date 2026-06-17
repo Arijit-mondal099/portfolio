@@ -7,6 +7,9 @@ import { staggerContainer, staggerItem } from "@/lib/motion";
 /** Intrinsic tags the motion primitives can render as. */
 type MotionTag = "div" | "section" | "ul" | "ol" | "li" | "span" | "p";
 
+/** Trigger as soon as a sliver enters, so items ease in rather than popping. */
+const VIEWPORT_AMOUNT = 0.15;
+
 interface StaggerProps {
   children: React.ReactNode;
   /** Element to render. Defaults to a `div`. */
@@ -32,7 +35,7 @@ export function Stagger({
   stagger = 0.08,
   delayChildren = 0,
   once = true,
-  amount = 0.3,
+  amount = VIEWPORT_AMOUNT,
 }: StaggerProps) {
   const Tag = motion[as] as React.ComponentType<HTMLMotionProps<"div">>;
 
@@ -54,28 +57,23 @@ interface StaggerItemProps {
   /** Element to render. Defaults to a `div`. */
   as?: MotionTag;
   className?: string;
-  /** Add a subtle lift on hover (for cards). */
-  hoverLift?: boolean;
 }
 
 /**
  * A single child of `Stagger`. Passing `className`/`as` lets it *become* the
  * existing tile (no extra wrapper div), preserving the parent grid/flex layout.
+ * Hover effects belong on a child (via CSS), not here, so the entrance transform
+ * doesn't fight a hover transform on the same element.
  */
 export function StaggerItem({
   children,
   as = "div",
   className,
-  hoverLift = false,
 }: StaggerItemProps) {
   const Tag = motion[as] as React.ComponentType<HTMLMotionProps<"div">>;
 
   return (
-    <Tag
-      className={className}
-      variants={staggerItem}
-      whileHover={hoverLift ? { y: -4 } : undefined}
-    >
+    <Tag className={className} variants={staggerItem}>
       {children}
     </Tag>
   );

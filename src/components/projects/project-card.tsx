@@ -34,7 +34,7 @@ function ProjectLink({
  */
 export function ProjectCard({ project }: { project: Project }) {
   return (
-    <Card className="h-full transition-shadow hover:ring-foreground/20">
+    <Card className="h-full transition-[transform,box-shadow] duration-200 group-hover:-translate-y-1 group-hover:ring-foreground/20">
       <Image
         src={project.image}
         alt={project.title}

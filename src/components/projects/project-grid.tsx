@@ -7,7 +7,7 @@ export function ProjectGrid({ projects }: { projects: Project[] }) {
   return (
     <Stagger className="grid grid-cols-1 gap-4 sm:grid-cols-2" stagger={0.1}>
       {projects.map((project) => (
-        <StaggerItem key={project.title} className="h-full" hoverLift>
+        <StaggerItem key={project.title} className="group h-full">
           <ProjectCard project={project} />
         </StaggerItem>
       ))}

@@ -9,7 +9,7 @@ import type { Transition, Variants } from "motion/react";
  * (see `providers.tsx`), which strips transforms while keeping opacity — so the
  * variants below need no per-component fallback.
  */
-export const DURATION = { fast: 0.3, base: 0.45, slow: 0.6 } as const;
+export const DURATION = { fast: 0.25, base: 0.4, slow: 0.6 } as const;
 
 export const OFFSET = { sm: 8, base: 12, lg: 16 } as const;
 

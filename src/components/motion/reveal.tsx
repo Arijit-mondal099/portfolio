@@ -20,6 +20,9 @@ interface RevealProps {
   amount?: number;
 }
 
+/** Trigger as soon as a sliver enters, so blocks ease in rather than popping. */
+const VIEWPORT_AMOUNT = 0.15;
+
 /**
  * Fades and lifts its children into view on scroll. Server content passed as
  * `children` stays server-rendered — only this wrapper is a client component,
@@ -31,7 +34,7 @@ export function Reveal({
   className,
   delay = 0,
   once = true,
-  amount = 0.3,
+  amount = VIEWPORT_AMOUNT,
 }: RevealProps) {
   const Tag = motion[as] as React.ComponentType<HTMLMotionProps<"div">>;
 
