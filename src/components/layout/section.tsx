@@ -1,3 +1,4 @@
+import { Reveal } from "@/components/motion/reveal";
 import { cn } from "@/lib/utils";
 
 interface SectionProps extends React.ComponentProps<"section"> {
@@ -7,6 +8,12 @@ interface SectionProps extends React.ComponentProps<"section"> {
   heading: string;
   /** Optional element aligned to the heading's right (e.g. a "view all" link). */
   action?: React.ReactNode;
+  /**
+   * Reveal the heading row on scroll. Used by sections whose body animates its
+   * own items (e.g. a staggered grid), so the heading isn't left static while
+   * the items cascade — without wrapping the whole section in a second reveal.
+   */
+  animateHeading?: boolean;
 }
 
 /**
@@ -19,16 +26,21 @@ export function Section({
   id,
   heading,
   action,
+  animateHeading,
   className,
   children,
   ...props
 }: SectionProps) {
+  const headingRow = (
+    <div className="mb-5 flex items-center justify-between gap-4">
+      <h2 className="text-2xl font-bold tracking-tight">{heading}</h2>
+      {action}
+    </div>
+  );
+
   return (
     <section id={id} className={cn("scroll-mt-16", className)} {...props}>
-      <div className="mb-5 flex items-center justify-between gap-4">
-        <h2 className="text-2xl font-bold tracking-tight">{heading}</h2>
-        {action}
-      </div>
+      {animateHeading ? <Reveal>{headingRow}</Reveal> : headingRow}
       {children}
     </section>
   );

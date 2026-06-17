@@ -20,6 +20,7 @@ export function Projects() {
     <Section
       id="projects"
       heading="Projects"
+      animateHeading
       action={
         projects.length > FEATURED_COUNT ? (
           <Link

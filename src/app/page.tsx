@@ -25,12 +25,8 @@ export default function Home() {
       <Reveal>
         <EducationExperience />
       </Reveal>
-      <Reveal>
-        <Skills />
-      </Reveal>
-      <Reveal>
-        <Projects />
-      </Reveal>
+      <Skills />
+      <Projects />
       <Reveal>
         <Contributions />
       </Reveal>

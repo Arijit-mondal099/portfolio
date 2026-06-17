@@ -5,7 +5,7 @@ import { skills } from "@/data/skills";
 /** Skills — a responsive grid of tiles, each with a tech logo + name. */
 export function Skills() {
   return (
-    <Section id="skills" heading="Skills">
+    <Section id="skills" heading="Skills" animateHeading>
       <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3">
         {skills.map(({ name, icon: Icon }, index) => (
           <Reveal key={name} delay={Math.min(index, 8) * 50}>
