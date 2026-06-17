@@ -9,7 +9,7 @@ export function Skills() {
       <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3">
         {skills.map(({ name, icon: Icon }, index) => (
           <Reveal key={name} delay={Math.min(index, 8) * 50}>
-            <div className="flex items-center gap-2.5 rounded-md border border-border bg-card px-3 py-2 text-sm transition-[background-color,transform] hover:bg-accent motion-safe:hover:-translate-y-0.5">
+            <div className="flex items-center gap-2.5 rounded-md border border-border bg-card px-3 py-2 text-sm transition-[background-color,transform] duration-300 ease-out hover:bg-accent motion-safe:hover:-translate-y-0.5">
               <Icon className="size-4 shrink-0" />
               <span>{name}</span>
             </div>

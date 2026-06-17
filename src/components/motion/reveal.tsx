@@ -44,7 +44,7 @@ export function Reveal({ delay = 0, className, style, ...props }: RevealProps) {
       data-shown={shown}
       style={{ transitionDelay: `${delay}ms`, ...style }}
       className={cn(
-        "translate-y-4 opacity-0 transition-all duration-700 ease-out",
+        "translate-y-4 opacity-0 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] will-change-[transform,opacity]",
         "data-[shown=true]:translate-y-0 data-[shown=true]:opacity-100",
         "motion-reduce:translate-y-0 motion-reduce:opacity-100 motion-reduce:transition-none",
         className
