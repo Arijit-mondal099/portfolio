@@ -69,15 +69,15 @@ export function SectionNav() {
           >
             <span
               className={cn(
-                "size-1.5 rounded-full transition-colors",
+                "size-1.5 rounded-full transition-[transform,background-color] duration-300 ease-out",
                 isActive
-                  ? "bg-foreground"
-                  : "bg-muted-foreground/40 group-hover:bg-muted-foreground"
+                  ? "scale-150 bg-foreground"
+                  : "bg-muted-foreground/40 group-hover:scale-125 group-hover:bg-muted-foreground"
               )}
             />
             <span
               className={cn(
-                "transition-colors",
+                "transition-colors duration-300 ease-out",
                 isActive
                   ? "text-foreground"
                   : "text-muted-foreground group-hover:text-foreground"
