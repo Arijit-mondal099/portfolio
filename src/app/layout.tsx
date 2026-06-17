@@ -72,6 +72,11 @@ export default function RootLayout({
       className={`${jetbrainsMono.variable} h-full motion-safe:scroll-smooth`}
     >
       <body className="flex min-h-full flex-col">
+        {/* Without JS the scroll-reveal observers never run, so reveal wrappers
+            (data-shown="false") would stay hidden. Show them by default then. */}
+        <noscript>
+          <style>{`[data-shown="false"]{opacity:1!important;transform:none!important}`}</style>
+        </noscript>
         {/* Providers (theme + query) wrap the chrome so the toggle and toasts
             get theme context. The providers add no DOM, so the flex layout is
             preserved. */}
