@@ -10,8 +10,11 @@ import {
 import "react-activity-calendar/tooltips.css";
 
 import { Section } from "@/components/layout/section";
+import { RevealGroup } from "@/components/motion/reveal-group";
+import { revealDelay, revealItem } from "@/components/motion/reveal-item";
 import { github } from "@/data/github";
 import { formatLongDate } from "@/lib/date";
+import { cn } from "@/lib/utils";
 
 // GitHub green ramps (level 0 → 4). Index 0 is the empty cell, tinted to each
 // theme's muted tone so it blends in; the rest are GitHub's own green scales.
@@ -59,18 +62,22 @@ export function Contributions() {
   });
 
   return (
-    <Section id="contributions" heading="GitHub Contributions">
-      {isError ? (
-        <p className="text-sm text-muted-foreground">
-          Couldn&apos;t load contributions right now.
-        </p>
-      ) : isPending ? (
-        <div className="h-32 w-full rounded-md bg-muted motion-safe:animate-pulse" />
-      ) : data.length === 0 ? (
-        <p className="text-sm text-muted-foreground">No contributions yet.</p>
-      ) : (
-        <ContributionGraph data={data} />
-      )}
+    <Section id="contributions" heading="GitHub Contributions" animateHeading>
+      <RevealGroup>
+        {isError ? (
+          <p className={cn("text-sm text-muted-foreground", revealItem)}>
+            Couldn&apos;t load contributions right now.
+          </p>
+        ) : isPending ? (
+          <div className="h-32 w-full rounded-md bg-muted motion-safe:animate-pulse" />
+        ) : data.length === 0 ? (
+          <p className={cn("text-sm text-muted-foreground", revealItem)}>
+            No contributions yet.
+          </p>
+        ) : (
+          <ContributionGraph data={data} />
+        )}
+      </RevealGroup>
     </Section>
   );
 }
@@ -87,7 +94,13 @@ function ContributionGraph({ data }: { data: Activity[] }) {
 
   return (
     <>
-      <div className="no-scrollbar overflow-x-auto pb-2 text-muted-foreground">
+      <div
+        className={cn(
+          "no-scrollbar overflow-x-auto pb-2 text-muted-foreground",
+          revealItem
+        )}
+        style={revealDelay(0)}
+      >
         <ActivityCalendar
           data={data}
           theme={calendarTheme}
@@ -108,7 +121,13 @@ function ContributionGraph({ data }: { data: Activity[] }) {
         />
       </div>
 
-      <div className="mt-1 flex flex-wrap items-center justify-between gap-3">
+      <div
+        className={cn(
+          "mt-1 flex flex-wrap items-center justify-between gap-3",
+          revealItem
+        )}
+        style={revealDelay(1)}
+      >
         <p className="text-sm text-muted-foreground">
           {total.toLocaleString()} contributions in {year} on{" "}
           <a

@@ -1,7 +1,10 @@
 import { ContactForm } from "@/components/contact/contact-form";
 import { Section } from "@/components/layout/section";
+import { RevealGroup } from "@/components/motion/reveal-group";
+import { revealDelay, revealItem } from "@/components/motion/reveal-item";
 import { profile } from "@/data/profile";
 import { socials } from "@/data/socials";
+import { cn } from "@/lib/utils";
 
 /** "Open to opportunities" pill with a pulsing dot, shown by the heading. */
 function AvailabilityBadge() {
@@ -22,18 +25,30 @@ function AvailabilityBadge() {
  */
 export function Contact() {
   return (
-    <Section id="contact" heading="Contact" action={<AvailabilityBadge />}>
-      <div className="grid gap-x-10 gap-y-8 sm:grid-cols-2 sm:items-center">
+    <Section
+      id="contact"
+      heading="Contact"
+      action={<AvailabilityBadge />}
+      animateHeading
+    >
+      <RevealGroup className="grid gap-x-10 gap-y-8 sm:grid-cols-2 sm:items-center">
         <div className="flex flex-col gap-6">
-          <p className="leading-relaxed text-muted-foreground">
+          <p
+            className={cn("leading-relaxed text-muted-foreground", revealItem)}
+            style={revealDelay(0)}
+          >
             {profile.contactNote}
           </p>
 
           <ul className="flex flex-col gap-1">
-            {socials.map(({ label, handle, href, icon: Icon }) => {
+            {socials.map(({ label, handle, href, icon: Icon }, index) => {
               const isExternal = href.startsWith("http");
               return (
-                <li key={label}>
+                <li
+                  key={label}
+                  className={revealItem}
+                  style={revealDelay(1 + index)}
+                >
                   <a
                     href={href}
                     {...(isExternal && {
@@ -56,8 +71,10 @@ export function Contact() {
           </ul>
         </div>
 
-        <ContactForm />
-      </div>
+        <div className={revealItem} style={revealDelay(1 + socials.length)}>
+          <ContactForm />
+        </div>
+      </RevealGroup>
     </Section>
   );
 }

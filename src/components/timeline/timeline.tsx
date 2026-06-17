@@ -1,6 +1,7 @@
 import { Code2, GraduationCap, type LucideIcon } from "lucide-react";
 import Image from "next/image";
 
+import { revealDelay, revealItem } from "@/components/motion/reveal-item";
 import { Badge } from "@/components/ui/badge";
 import { type TimelineGroup } from "@/data/timeline";
 import { formatDuration, formatRange } from "@/lib/date";
@@ -11,18 +12,6 @@ const markerIcon: Record<"experience" | "education", LucideIcon> = {
   experience: Code2,
   education: GraduationCap,
 };
-
-// Each item (group header + entries) fades and lifts in, staggered, so the
-// timeline assembles itself one item at a time. The animation replays on every
-// tab switch because Base UI re-shows the panel from `display:none` (which
-// restarts CSS animations). `fill-mode-both` keeps items hidden until their turn.
-const STAGGER_MS = 70;
-const itemMotion =
-  "motion-safe:animate-in motion-safe:fade-in-0 motion-safe:slide-in-from-bottom-2 motion-safe:fill-mode-both motion-safe:duration-500 motion-safe:ease-out";
-
-const delay = (order: number) => ({
-  animationDelay: `${order * STAGGER_MS}ms`,
-});
 
 /**
  * A vertical timeline grouped by organization. Each group shows a logo + name
@@ -52,8 +41,8 @@ export function Timeline({
       {groups.map((group, gi) => (
         <div key={group.org}>
           <div
-            className={cn("mb-4 flex items-center gap-3", itemMotion)}
-            style={delay(groupStart[gi])}
+            className={cn("mb-4 flex items-center gap-3", revealItem)}
+            style={revealDelay(groupStart[gi])}
           >
             <Image
               src={group.logo}
@@ -75,8 +64,8 @@ export function Timeline({
             {group.entries.map((entry, index) => (
               <li
                 key={entry.title}
-                className={cn("relative pl-10", itemMotion)}
-                style={delay(groupStart[gi] + 1 + index)}
+                className={cn("relative pl-10", revealItem)}
+                style={revealDelay(groupStart[gi] + 1 + index)}
               >
                 {/* Connecting line to the next entry (not after the last). */}
                 {index < group.entries.length - 1 && (
