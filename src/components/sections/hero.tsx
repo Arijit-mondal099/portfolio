@@ -1,6 +1,7 @@
 import { Mail } from "lucide-react";
 import Image from "next/image";
 
+import { Reveal } from "@/components/motion/reveal";
 import { ResumeDialog } from "@/components/resume-dialog";
 import { buttonVariants } from "@/components/ui/button";
 import { profile } from "@/data/profile";
@@ -15,7 +16,7 @@ export function Hero() {
   return (
     <section className="flex flex-col-reverse items-start gap-6 sm:flex-row sm:items-center sm:justify-between">
       <div className="flex flex-col gap-5">
-        <div className="space-y-1">
+        <Reveal className="space-y-1">
           <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
             {profile.name}
           </h1>
@@ -24,9 +25,9 @@ export function Hero() {
               <p key={line}>{line}</p>
             ))}
           </div>
-        </div>
+        </Reveal>
 
-        <div className="flex flex-wrap gap-3">
+        <Reveal delay={120} className="flex flex-wrap gap-3">
           <a
             href={profile.contactHref}
             className={cn(buttonVariants({ variant: "outline" }), "uppercase")}
@@ -35,17 +36,19 @@ export function Hero() {
             Contact me
           </a>
           <ResumeDialog />
-        </div>
+        </Reveal>
       </div>
 
-      <Image
-        src={profile.avatar.src}
-        alt={profile.avatar.alt}
-        width={112}
-        height={112}
-        priority
-        className="size-36 rounded-xl border border-border object-cover object-top"
-      />
+      <Reveal delay={200}>
+        <Image
+          src={profile.avatar.src}
+          alt={profile.avatar.alt}
+          width={112}
+          height={112}
+          priority
+          className="size-36 rounded-xl border border-border object-cover object-top"
+        />
+      </Reveal>
     </section>
   );
 }

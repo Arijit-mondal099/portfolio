@@ -1,4 +1,5 @@
 import { SectionNav } from "@/components/layout/section-nav";
+import { Reveal } from "@/components/motion/reveal";
 import { About } from "@/components/sections/about";
 import { Contact } from "@/components/sections/contact";
 import { Contributions } from "@/components/sections/contributions";
@@ -18,12 +19,24 @@ export default function Home() {
     <main className="mx-auto w-full max-w-2xl flex-1 space-y-16 px-6 py-16 sm:py-24">
       <SectionNav />
       <Hero />
-      <About />
-      <EducationExperience />
-      <Skills />
-      <Projects />
-      <Contributions />
-      <Contact />
+      <Reveal>
+        <About />
+      </Reveal>
+      <Reveal>
+        <EducationExperience />
+      </Reveal>
+      <Reveal>
+        <Skills />
+      </Reveal>
+      <Reveal>
+        <Projects />
+      </Reveal>
+      <Reveal>
+        <Contributions />
+      </Reveal>
+      <Reveal>
+        <Contact />
+      </Reveal>
     </main>
   );
 }
