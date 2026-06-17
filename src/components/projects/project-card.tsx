@@ -34,13 +34,13 @@ function ProjectLink({
  */
 export function ProjectCard({ project }: { project: Project }) {
   return (
-    <Card className="h-full transition-[transform,box-shadow] duration-200 group-hover:-translate-y-1 group-hover:ring-foreground/20">
+    <Card className="h-full transition-transform duration-300 ease-out group-hover:-translate-y-1">
       <Image
         src={project.image}
         alt={project.title}
         width={600}
         height={375}
-        className="aspect-[16/10] w-full object-cover"
+        className="aspect-[16/10] w-full object-cover transition-transform duration-300 ease-out group-hover:scale-[1.04]"
       />
       <CardContent className="flex-1">
         <p className="leading-relaxed text-muted-foreground">
