@@ -65,7 +65,7 @@ export function Contributions() {
           Couldn&apos;t load contributions right now.
         </p>
       ) : isPending ? (
-        <div className="h-32 w-full animate-pulse rounded-md bg-muted" />
+        <div className="h-32 w-full rounded-md bg-muted motion-safe:animate-pulse" />
       ) : data.length === 0 ? (
         <p className="text-sm text-muted-foreground">No contributions yet.</p>
       ) : (
