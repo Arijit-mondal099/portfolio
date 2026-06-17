@@ -5,7 +5,7 @@ import { motion, type HTMLMotionProps } from "motion/react";
 import { staggerContainer, staggerItem } from "@/lib/motion";
 
 /** Intrinsic tags the motion primitives can render as. */
-type MotionTag = "div" | "section" | "ul" | "li" | "span" | "p";
+type MotionTag = "div" | "section" | "ul" | "ol" | "li" | "span" | "p";
 
 interface StaggerProps {
   children: React.ReactNode;

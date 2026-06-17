@@ -1,6 +1,7 @@
 import { Code2, GraduationCap, type LucideIcon } from "lucide-react";
 import Image from "next/image";
 
+import { Stagger, StaggerItem } from "@/components/motion/stagger";
 import { Badge } from "@/components/ui/badge";
 import { type TimelineGroup } from "@/data/timeline";
 import { formatDuration, formatRange } from "@/lib/date";
@@ -46,9 +47,9 @@ export function Timeline({
             )}
           </div>
 
-          <ol className="flex flex-col gap-6">
+          <Stagger as="ol" className="flex flex-col gap-6" stagger={0.06}>
             {group.entries.map((entry, index) => (
-              <li key={entry.title} className="relative pl-10">
+              <StaggerItem as="li" key={entry.title} className="relative pl-10">
                 {/* Connecting line to the next entry (not after the last). */}
                 {index < group.entries.length - 1 && (
                   <span
@@ -92,9 +93,9 @@ export function Timeline({
                     ))}
                   </ul>
                 )}
-              </li>
+              </StaggerItem>
             ))}
-          </ol>
+          </Stagger>
         </div>
       ))}
     </div>
