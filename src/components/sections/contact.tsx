@@ -40,9 +40,9 @@ export function Contact() {
                       target: "_blank",
                       rel: "noopener noreferrer",
                     })}
-                    className="group -mx-2 flex items-center gap-3 rounded-md px-2 py-2 transition-colors hover:bg-muted"
+                    className="group -mx-2 flex items-center gap-3 rounded-md px-2 py-2 transition-colors duration-200 ease-out hover:bg-muted"
                   >
-                    <Icon className="size-5 shrink-0 text-muted-foreground transition-[color,transform] duration-300 ease-out group-hover:text-foreground motion-safe:group-hover:translate-x-0.5" />
+                    <Icon className="size-5 shrink-0 text-muted-foreground transition-colors duration-200 ease-out group-hover:text-foreground" />
                     <span className="flex flex-col leading-tight">
                       <span className="text-foreground">{label}</span>
                       <span className="text-xs text-muted-foreground">
