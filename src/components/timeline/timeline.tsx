@@ -4,12 +4,25 @@ import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { type TimelineGroup } from "@/data/timeline";
 import { formatDuration, formatRange } from "@/lib/date";
+import { cn } from "@/lib/utils";
 
 // Marker icon shown beside each entry, per tab.
 const markerIcon: Record<"experience" | "education", LucideIcon> = {
   experience: Code2,
   education: GraduationCap,
 };
+
+// Each item (group header + entries) fades and lifts in, staggered, so the
+// timeline assembles itself one item at a time. The animation replays on every
+// tab switch because Base UI re-shows the panel from `display:none` (which
+// restarts CSS animations). `fill-mode-both` keeps items hidden until their turn.
+const STAGGER_MS = 70;
+const itemMotion =
+  "motion-safe:animate-in motion-safe:fade-in-0 motion-safe:slide-in-from-bottom-2 motion-safe:fill-mode-both motion-safe:duration-500 motion-safe:ease-out";
+
+const delay = (order: number) => ({
+  animationDelay: `${order * STAGGER_MS}ms`,
+});
 
 /**
  * A vertical timeline grouped by organization. Each group shows a logo + name
@@ -25,11 +38,23 @@ export function Timeline({
 }) {
   const Marker = markerIcon[variant];
 
+  // Starting order index for each group (1 header + N entries), so the stagger
+  // flows continuously across groups: header → its entries → next header → …
+  const groupStart: number[] = [];
+  let running = 0;
+  for (const group of groups) {
+    groupStart.push(running);
+    running += 1 + group.entries.length;
+  }
+
   return (
     <div className="flex flex-col gap-8">
-      {groups.map((group) => (
+      {groups.map((group, gi) => (
         <div key={group.org}>
-          <div className="mb-4 flex items-center gap-3">
+          <div
+            className={cn("mb-4 flex items-center gap-3", itemMotion)}
+            style={delay(groupStart[gi])}
+          >
             <Image
               src={group.logo}
               alt={group.org}
@@ -48,7 +73,11 @@ export function Timeline({
 
           <ol className="flex flex-col gap-6">
             {group.entries.map((entry, index) => (
-              <li key={entry.title} className="relative pl-10">
+              <li
+                key={entry.title}
+                className={cn("relative pl-10", itemMotion)}
+                style={delay(groupStart[gi] + 1 + index)}
+              >
                 {/* Connecting line to the next entry (not after the last). */}
                 {index < group.entries.length - 1 && (
                   <span
