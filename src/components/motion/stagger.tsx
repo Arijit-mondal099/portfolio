@@ -5,7 +5,17 @@ import { motion, type HTMLMotionProps } from "motion/react";
 import { staggerContainer, staggerItem } from "@/lib/motion";
 
 /** Intrinsic tags the motion primitives can render as. */
-type MotionTag = "div" | "section" | "ul" | "ol" | "li" | "span" | "p";
+type MotionTag =
+  | "div"
+  | "section"
+  | "ul"
+  | "ol"
+  | "li"
+  | "span"
+  | "p"
+  | "h1"
+  | "h2"
+  | "h3";
 
 /** Trigger as soon as a sliver enters, so items ease in rather than popping. */
 const VIEWPORT_AMOUNT = 0.15;

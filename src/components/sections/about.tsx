@@ -6,7 +6,11 @@ import { profile } from "@/data/profile";
 export function About() {
   return (
     <Section id="about" heading="About">
-      <Reveal as="p" className="leading-relaxed text-muted-foreground">
+      <Reveal
+        as="p"
+        className="leading-relaxed text-muted-foreground"
+        delay={0.12}
+      >
         {profile.about}
       </Reveal>
     </Section>

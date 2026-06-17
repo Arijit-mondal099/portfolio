@@ -5,7 +5,17 @@ import { motion, type HTMLMotionProps } from "motion/react";
 import { fadeUp, transition } from "@/lib/motion";
 
 /** Intrinsic tags the motion primitives can render as. */
-type MotionTag = "div" | "section" | "ul" | "ol" | "li" | "span" | "p";
+type MotionTag =
+  | "div"
+  | "section"
+  | "ul"
+  | "ol"
+  | "li"
+  | "span"
+  | "p"
+  | "h1"
+  | "h2"
+  | "h3";
 
 interface RevealProps {
   children: React.ReactNode;

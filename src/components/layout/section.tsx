@@ -1,3 +1,4 @@
+import { Reveal } from "@/components/motion/reveal";
 import { cn } from "@/lib/utils";
 
 interface SectionProps extends React.ComponentProps<"section"> {
@@ -26,7 +27,9 @@ export function Section({
   return (
     <section id={id} className={cn("scroll-mt-16", className)} {...props}>
       <div className="mb-5 flex items-center justify-between gap-4">
-        <h2 className="text-2xl font-bold tracking-tight">{heading}</h2>
+        <Reveal as="h2" className="text-2xl font-bold tracking-tight">
+          {heading}
+        </Reveal>
         {action}
       </div>
       {children}
