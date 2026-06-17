@@ -72,6 +72,11 @@ export default function RootLayout({
       className={`${jetbrainsMono.variable} h-full motion-safe:scroll-smooth`}
     >
       <body className="flex min-h-full flex-col">
+        {/* Without JS the motion entrances never run, so elements rendered with
+            their `initial` (hidden) state would stay at opacity:0. Reveal them. */}
+        <noscript>
+          <style>{`[style*="opacity:0"]{opacity:1!important;transform:none!important}`}</style>
+        </noscript>
         {/* Providers (theme + query) wrap the chrome so the toggle and toasts
             get theme context. The providers add no DOM, so the flex layout is
             preserved. */}

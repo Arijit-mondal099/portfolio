@@ -24,7 +24,7 @@ export function Projects() {
         projects.length > FEATURED_COUNT ? (
           <Link
             href="/projects"
-            className="inline-flex shrink-0 items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
+            className="link-underline inline-flex shrink-0 items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
           >
             View all projects
             <ArrowRight className="size-4" />

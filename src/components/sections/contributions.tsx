@@ -10,6 +10,7 @@ import {
 import "react-activity-calendar/tooltips.css";
 
 import { Section } from "@/components/layout/section";
+import { Reveal } from "@/components/motion/reveal";
 import { github } from "@/data/github";
 import { formatLongDate } from "@/lib/date";
 
@@ -69,7 +70,9 @@ export function Contributions() {
       ) : data.length === 0 ? (
         <p className="text-sm text-muted-foreground">No contributions yet.</p>
       ) : (
-        <ContributionGraph data={data} />
+        <Reveal>
+          <ContributionGraph data={data} />
+        </Reveal>
       )}
     </Section>
   );

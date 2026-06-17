@@ -1,7 +1,9 @@
 "use client";
 
+import { motion } from "motion/react";
 import { useEffect, useState } from "react";
 
+import { DURATION, EASE } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 
 // Sections tracked by the nav, in page order. Edit labels/ids here.
@@ -67,14 +69,28 @@ export function SectionNav() {
             aria-current={isActive ? "true" : undefined}
             className="group flex items-center gap-3 text-sm"
           >
-            <span
-              className={cn(
-                "size-1.5 rounded-full transition-colors",
-                isActive
-                  ? "bg-foreground"
-                  : "bg-muted-foreground/40 group-hover:bg-muted-foreground"
+            <span className="relative flex size-1.5">
+              <span
+                className={cn(
+                  "size-1.5 rounded-full transition-colors",
+                  isActive
+                    ? "bg-transparent"
+                    : "bg-muted-foreground/40 group-hover:bg-muted-foreground"
+                )}
+              />
+              {isActive && (
+                <motion.span
+                  layoutId="section-nav-active"
+                  initial={false}
+                  transition={{
+                    type: "tween",
+                    duration: DURATION.fast,
+                    ease: EASE,
+                  }}
+                  className="absolute inset-0 rounded-full bg-foreground"
+                />
               )}
-            />
+            </span>
             <span
               className={cn(
                 "transition-colors",

@@ -1,32 +1,50 @@
+"use client";
+
 import { Mail } from "lucide-react";
+import { motion } from "motion/react";
 import Image from "next/image";
 
 import { ResumeDialog } from "@/components/resume-dialog";
 import { buttonVariants } from "@/components/ui/button";
 import { profile } from "@/data/profile";
+import { staggerContainer, staggerItem } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 
 /**
  * Hero — the site headline: name, tagline, two CTAs (Contact / Resume) and the
  * avatar. CTAs are anchors styled with `buttonVariants` (the canonical shadcn
  * pattern for a link that looks like a button), so they remain real links.
+ *
+ * On load the pieces cascade in (name → tagline → CTAs, avatar alongside) via a
+ * stagger container animating on mount rather than on scroll.
  */
 export function Hero() {
   return (
-    <section className="flex flex-col-reverse items-start gap-6 sm:flex-row sm:items-center sm:justify-between">
+    <motion.section
+      className="flex flex-col-reverse items-start gap-6 sm:flex-row sm:items-center sm:justify-between"
+      initial="hidden"
+      animate="visible"
+      variants={staggerContainer(0.1, 0.1)}
+    >
       <div className="flex flex-col gap-5">
         <div className="space-y-1">
-          <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
+          <motion.h1
+            variants={staggerItem}
+            className="text-4xl font-bold tracking-tight sm:text-5xl"
+          >
             {profile.name}
-          </h1>
-          <div className="text-sm text-muted-foreground">
+          </motion.h1>
+          <motion.div
+            variants={staggerItem}
+            className="text-sm text-muted-foreground"
+          >
             {profile.tagline.map((line) => (
               <p key={line}>{line}</p>
             ))}
-          </div>
+          </motion.div>
         </div>
 
-        <div className="flex flex-wrap gap-3">
+        <motion.div variants={staggerItem} className="flex flex-wrap gap-3">
           <a
             href={profile.contactHref}
             className={cn(buttonVariants({ variant: "outline" }), "uppercase")}
@@ -35,17 +53,19 @@ export function Hero() {
             Contact me
           </a>
           <ResumeDialog />
-        </div>
+        </motion.div>
       </div>
 
-      <Image
-        src={profile.avatar.src}
-        alt={profile.avatar.alt}
-        width={112}
-        height={112}
-        priority
-        className="size-36 rounded-xl border border-border object-cover object-top"
-      />
-    </section>
+      <motion.div variants={staggerItem}>
+        <Image
+          src={profile.avatar.src}
+          alt={profile.avatar.alt}
+          width={112}
+          height={112}
+          priority
+          className="size-36 rounded-xl border border-border object-cover object-top"
+        />
+      </motion.div>
+    </motion.section>
   );
 }

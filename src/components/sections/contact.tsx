@@ -1,5 +1,7 @@
 import { ContactForm } from "@/components/contact/contact-form";
 import { Section } from "@/components/layout/section";
+import { Reveal } from "@/components/motion/reveal";
+import { Stagger, StaggerItem } from "@/components/motion/stagger";
 import { profile } from "@/data/profile";
 import { socials } from "@/data/socials";
 
@@ -25,15 +27,15 @@ export function Contact() {
     <Section id="contact" heading="Contact" action={<AvailabilityBadge />}>
       <div className="grid gap-x-10 gap-y-8 sm:grid-cols-2 sm:items-center">
         <div className="flex flex-col gap-6">
-          <p className="leading-relaxed text-muted-foreground">
+          <Reveal as="p" className="leading-relaxed text-muted-foreground">
             {profile.contactNote}
-          </p>
+          </Reveal>
 
-          <ul className="flex flex-col gap-1">
+          <Stagger as="ul" className="flex flex-col gap-1" stagger={0.07}>
             {socials.map(({ label, handle, href, icon: Icon }) => {
               const isExternal = href.startsWith("http");
               return (
-                <li key={label}>
+                <StaggerItem as="li" key={label}>
                   <a
                     href={href}
                     {...(isExternal && {
@@ -50,13 +52,15 @@ export function Contact() {
                       </span>
                     </span>
                   </a>
-                </li>
+                </StaggerItem>
               );
             })}
-          </ul>
+          </Stagger>
         </div>
 
-        <ContactForm />
+        <Reveal>
+          <ContactForm />
+        </Reveal>
       </div>
     </Section>
   );
