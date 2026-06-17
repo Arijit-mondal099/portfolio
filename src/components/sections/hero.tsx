@@ -44,7 +44,7 @@ export function Hero() {
         width={112}
         height={112}
         priority
-        className="size-28 rounded-xl border border-border object-cover"
+        className="size-36 rounded-xl border border-border object-cover object-top"
       />
     </section>
   );
