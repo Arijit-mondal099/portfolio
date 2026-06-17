@@ -1,20 +1,14 @@
 "use client";
 
 import { Mail } from "lucide-react";
-import { motion, type Variants } from "motion/react";
+import { motion } from "motion/react";
 import Image from "next/image";
 
 import { ResumeDialog } from "@/components/resume-dialog";
 import { buttonVariants } from "@/components/ui/button";
 import { profile } from "@/data/profile";
-import { staggerContainer, staggerItem, transition } from "@/lib/motion";
+import { staggerContainer, staggerItem } from "@/lib/motion";
 import { cn } from "@/lib/utils";
-
-/** Avatar entrance — a gentle fade and scale alongside the text cascade. */
-const avatar: Variants = {
-  hidden: { opacity: 0, scale: 0.96 },
-  visible: { opacity: 1, scale: 1, transition },
-};
 
 /**
  * Hero — the site headline: name, tagline, two CTAs (Contact / Resume) and the
@@ -62,7 +56,7 @@ export function Hero() {
         </motion.div>
       </div>
 
-      <motion.div variants={avatar}>
+      <motion.div variants={staggerItem}>
         <Image
           src={profile.avatar.src}
           alt={profile.avatar.alt}
