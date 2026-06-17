@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
+import { JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Footer } from "@/components/layout/footer";
 import { SiteHeader } from "@/components/layout/site-header";
@@ -8,20 +8,13 @@ import { siteUrl } from "@/lib/site";
 import { Providers } from "./providers";
 
 /*
- * Two self-hosted local fonts: a display face for headings and a text face for
- * everything else. `--font-heading` / `--font-body` are consumed by globals.css
- * (headings use the former; the body and Tailwind's font-sans/mono use the
- * latter).
+ * JetBrains Mono drives the entire UI — the reference uses a monospace,
+ * terminal-style typeface throughout. It's a variable font, so we don't pin
+ * weights here; `--font-jetbrains-mono` is consumed by globals.css.
  */
-const headingFont = localFont({
-  src: "../../public/fonts/heading-font.ttf",
-  variable: "--font-heading",
-  display: "swap",
-});
-
-const bodyFont = localFont({
-  src: "../../public/fonts/normal-font.ttf",
-  variable: "--font-body",
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-jetbrains-mono",
+  subsets: ["latin"],
   display: "swap",
 });
 
@@ -76,7 +69,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${headingFont.variable} ${bodyFont.variable} h-full motion-safe:scroll-smooth`}
+      className={`${jetbrainsMono.variable} h-full motion-safe:scroll-smooth`}
     >
       <body className="flex min-h-full flex-col">
         {/* Without JS the motion entrances never run, so elements rendered with

@@ -82,9 +82,8 @@
 /*
  * Map raw tokens to Tailwind's theme so utilities like `bg-background`,
  * `text-muted-foreground`, `border-border`, and `rounded-md` are generated.
- * `--font-body` / `--font-heading` are injected by next/font in `layout.tsx`;
- * body text (and Tailwind's font-sans/mono) use the body face, while the section
- * heading opts into the heading face via `font-(family-name:--font-heading)`.
+ * `--font-jetbrains-mono` is injected by next/font in `layout.tsx`; the whole
+ * site uses it (mono everywhere) so both sans and mono point at it.
  */
 @theme inline {
   --color-background: var(--background);
@@ -107,8 +106,8 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
 
-  --font-sans: var(--font-body);
-  --font-mono: var(--font-body);
+  --font-sans: var(--font-jetbrains-mono);
+  --font-mono: var(--font-jetbrains-mono);
 
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
