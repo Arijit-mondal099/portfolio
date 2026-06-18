@@ -32,7 +32,7 @@ export function Marquee({
   return (
     <div
       className={cn(
-        "marquee group no-scrollbar flex gap-2.5 overflow-hidden py-1",
+        "marquee no-scrollbar flex gap-2.5 overflow-hidden py-1",
         className
       )}
       style={
