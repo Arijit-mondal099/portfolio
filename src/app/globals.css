@@ -171,6 +171,63 @@ html::-webkit-scrollbar {
 }
 
 /*
+ * Skills marquee — each category row auto-scrolls horizontally and loops
+ * seamlessly. The tiles are rendered as several identical copies in a flex
+ * track; every copy runs the same keyframe, translating one copy-width (plus the
+ * inter-copy gap) so the restart drops an identical copy into place.
+ * `--marquee-direction` flips travel per row (rows alternate left→right /
+ * right→left); the mask fades both edges so tiles dissolve instead of hard-
+ * clipping; hovering the row pauses it. Under reduced motion the animation is
+ * dropped and the row becomes a normal horizontal scroller with a single copy.
+ * `--marquee-gap` must match the track's `gap-2.5` (0.625rem).
+ */
+.marquee {
+  --marquee-gap: 0.625rem;
+  --marquee-duration: 30s;
+  --marquee-direction: normal;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 2rem,
+    #000 calc(100% - 2rem),
+    transparent
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 2rem,
+    #000 calc(100% - 2rem),
+    transparent
+  );
+}
+.marquee-track {
+  animation: marquee var(--marquee-duration) linear infinite;
+  animation-direction: var(--marquee-direction);
+}
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-100% - var(--marquee-gap)));
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee {
+    overflow-x: auto;
+  }
+  .marquee-track {
+    animation: none;
+  }
+  .marquee-track[aria-hidden="true"] {
+    display: none;
+  }
+}
+
+/*
  * Theme-change reveal. The toggle wraps the swap in the View Transitions API and
  * animates a clip-path circle growing from the toggle (top-right). Disable the
  * default cross-fade so only the new theme's circular reveal plays, and stack
