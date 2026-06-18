@@ -1,57 +1,112 @@
 import type { IconType } from "react-icons";
 import { FaAws } from "react-icons/fa6";
-import { LuActivity, LuLeaf } from "react-icons/lu";
+import { LuDatabase, LuNetwork } from "react-icons/lu";
 import {
-  SiBun,
+  SiCplusplus,
+  SiCss,
   SiDocker,
+  SiDrizzle,
   SiExpress,
-  SiGo,
-  SiHono,
-  SiKubernetes,
+  SiFramer,
+  SiGit,
+  SiGithub,
+  SiHtml5,
+  SiJavascript,
+  SiJsonwebtokens,
   SiMongodb,
+  SiMongoose,
+  SiMysql,
   SiNextdotjs,
-  SiNginx,
   SiNodedotjs,
   SiPostgresql,
+  SiPostman,
   SiPrisma,
+  SiPython,
   SiReact,
-  SiRust,
-  SiSolana,
+  SiRedux,
+  SiShadcnui,
+  SiSocketdotio,
   SiTailwindcss,
   SiTypescript,
 } from "react-icons/si";
+import { VscVscode } from "react-icons/vsc";
 
 /**
- * Skills shown as a logo grid. Each entry pairs a display name with a brand
- * logo (react-icons). A few items without an official Simple Icon use a close
- * stand-in: React Native reuses the React mark, AWS uses the Font Awesome mark,
- * Elysia/Monitoring use neutral icons.
+ * Skills shown as a logo grid, organized into labeled categories. Each entry
+ * pairs a display name with a brand logo (react-icons). A few items without an
+ * official Simple Icon use a close stand-in: Motion uses the Framer mark (it was
+ * formerly Framer Motion); REST APIs and Vector DB (Pinecone) use neutral Lucide
+ * icons; VS Code uses the mark from the VS Code icon set.
  */
 export interface Skill {
   name: string;
   icon: IconType;
 }
 
-export const skills: Skill[] = [
-  { name: "Typescript", icon: SiTypescript },
-  { name: "Rust", icon: SiRust },
-  { name: "Golang", icon: SiGo },
-  { name: "Solana", icon: SiSolana },
-  { name: "React", icon: SiReact },
-  { name: "React Native", icon: SiReact },
-  { name: "Next.js", icon: SiNextdotjs },
-  { name: "Tailwind CSS", icon: SiTailwindcss },
-  { name: "Bun.js", icon: SiBun },
-  { name: "Node.js", icon: SiNodedotjs },
-  { name: "Elysia", icon: LuLeaf },
-  { name: "Hono", icon: SiHono },
-  { name: "Express", icon: SiExpress },
-  { name: "Postgres", icon: SiPostgresql },
-  { name: "Mongo DB", icon: SiMongodb },
-  { name: "Prisma", icon: SiPrisma },
-  { name: "Docker", icon: SiDocker },
-  { name: "Kubernetes", icon: SiKubernetes },
-  { name: "AWS", icon: FaAws },
-  { name: "Nginx", icon: SiNginx },
-  { name: "Monitoring", icon: LuActivity },
+export interface SkillGroup {
+  category: string;
+  skills: Skill[];
+}
+
+export const skillGroups: SkillGroup[] = [
+  {
+    category: "Languages",
+    skills: [
+      { name: "C++", icon: SiCplusplus },
+      { name: "JavaScript", icon: SiJavascript },
+      { name: "TypeScript", icon: SiTypescript },
+      { name: "Python", icon: SiPython },
+    ],
+  },
+  {
+    category: "Frontend",
+    skills: [
+      { name: "HTML", icon: SiHtml5 },
+      { name: "CSS", icon: SiCss },
+      { name: "React.js", icon: SiReact },
+      { name: "Next.js", icon: SiNextdotjs },
+      { name: "Tailwind CSS", icon: SiTailwindcss },
+      { name: "Shadcn UI", icon: SiShadcnui },
+      { name: "Motion", icon: SiFramer },
+      { name: "Redux", icon: SiRedux },
+    ],
+  },
+  {
+    category: "Backend",
+    skills: [
+      { name: "Node.js", icon: SiNodedotjs },
+      { name: "Express.js", icon: SiExpress },
+      { name: "Socket.IO", icon: SiSocketdotio },
+      { name: "REST APIs", icon: LuNetwork },
+      { name: "JWT Auth", icon: SiJsonwebtokens },
+    ],
+  },
+  {
+    category: "Databases & ORMs",
+    skills: [
+      { name: "MongoDB", icon: SiMongodb },
+      { name: "MySQL", icon: SiMysql },
+      { name: "PostgreSQL", icon: SiPostgresql },
+      { name: "Vector DB (Pinecone)", icon: LuDatabase },
+      { name: "Mongoose", icon: SiMongoose },
+      { name: "Prisma", icon: SiPrisma },
+      { name: "Drizzle", icon: SiDrizzle },
+    ],
+  },
+  {
+    category: "DevOps & Cloud",
+    skills: [
+      { name: "AWS", icon: FaAws },
+      { name: "Docker", icon: SiDocker },
+    ],
+  },
+  {
+    category: "Tools",
+    skills: [
+      { name: "Git", icon: SiGit },
+      { name: "GitHub", icon: SiGithub },
+      { name: "VS Code", icon: VscVscode },
+      { name: "Postman", icon: SiPostman },
+    ],
+  },
 ];
