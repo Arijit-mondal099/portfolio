@@ -23,7 +23,10 @@ export function ResumeDialog() {
   return (
     <Dialog>
       <DialogTrigger
-        className={cn(buttonVariants({ variant: "outline" }), "uppercase")}
+        className={cn(
+          buttonVariants({ variant: "outline" }),
+          "uppercase hover:cursor-pointer"
+        )}
       >
         <FileText />
         Resume

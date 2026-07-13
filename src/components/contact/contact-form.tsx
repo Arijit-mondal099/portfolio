@@ -101,7 +101,7 @@ export function ContactForm() {
       <Button
         type="submit"
         variant="secondary"
-        className="w-full"
+        className="w-full hover:cursor-pointer"
         disabled={mutation.isPending}
       >
         {mutation.isPending ? "Sending..." : "Drop a message"}
