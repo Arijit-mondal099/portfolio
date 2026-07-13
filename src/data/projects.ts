@@ -20,51 +20,51 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    title: "Realtime Video Chat",
+    title: "SupportAI",
     description:
-      "A real-time, Omegle-style video chat app featuring instant matchmaking, private rooms, and live peer-to-peer streaming.",
+      "AI-powered customer support platform answering from your own docs via RAG accurate, on-brand, no hallucinations.",
     image: "/projects/project-1.png",
-    demoUrl: "#",
-    sourceUrl: "#",
+    demoUrl: "https://supportai-seven.vercel.app",
+    sourceUrl: "https://github.com/Arijit-mondal099/supportai",
   },
   {
-    title: "E-commerce Storefront",
+    title: "Health",
     description:
-      "A responsive, performance-focused e-commerce site with a polished product catalog and a fast, accessible checkout flow.",
+      "Full-stack doctor appointment booking system with role-based dashboards, JWT auth, and Razorpay payment integration.",
     image: "/projects/project-2.png",
-    demoUrl: "#",
-    sourceUrl: "#",
+    demoUrl: "https://health-frontend-c4x4.onrender.com",
+    sourceUrl: "https://github.com/Arijit-mondal099/health",
   },
   {
-    title: "Chat with PDF (SaaS)",
+    title: "Docsy",
     description:
-      "A SaaS web app that lets users upload PDF documents and interact with them through natural-language questions and answers.",
+      "Chat with your PDFs using AI — RAG-powered document Q&A with GPT-4o, Gemini, and Pinecone vector search.",
     image: "/projects/project-3.png",
-    demoUrl: "#",
-    sourceUrl: "#",
+    demoUrl: "https://docsy-olive.vercel.app",
+    sourceUrl: "https://github.com/Arijit-mondal099/docsy",
   },
   {
-    title: "Solana Wallet-as-a-Service",
+    title: "Folio",
     description:
-      "A Wallet-as-a-Service platform on Solana with hybrid decentralized/centralized exchange functionality, secure authentication, and AES-GCM private key management.",
+      "AI-powered note app with inline AI transforms, a chat assistant, and export to PDF, Word, and Markdown.",
     image: "/projects/project-4.png",
-    demoUrl: "#",
-    sourceUrl: "#",
+    demoUrl: "https://folio-beryl-delta.vercel.app",
+    sourceUrl: "https://github.com/Arijit-mondal099/folio",
   },
   {
-    title: "GSAP Animation Showcase",
+    title: "ZenoCart",
     description:
-      "An animation-driven website built with GSAP, showcasing interactive animations and smooth, performant transitions.",
+      "Full-stack e-commerce platform with Razorpay payments, JWT auth, and an admin dashboard for orders and products.",
     image: "/projects/project-5.png",
-    demoUrl: "#",
-    sourceUrl: "#",
+    demoUrl: "https://zenocart.onrender.com",
+    sourceUrl: "https://github.com/Arijit-mondal099/zenocart",
   },
   {
-    title: "Admin Dashboard",
+    title: "TaskPilot",
     description:
-      "A modern admin dashboard built with Next.js, featuring data visualization with Recharts, form validation via React Hook Form + Zod, and a polished shadcn/Tailwind UI.",
+      "Task management app with a React dashboard, JWT authentication, and MongoDB-backed data persistence.",
     image: "/projects/project-6.png",
-    demoUrl: "#",
-    sourceUrl: "#",
+    demoUrl: "https://taskpilot-6i8g.onrender.com",
+    sourceUrl: "https://github.com/Arijit-mondal099/taskPilot",
   },
 ];

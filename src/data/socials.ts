@@ -42,8 +42,8 @@ export const socials: Social[] = [
   },
   {
     label: "LinkedIn",
-    handle: "in/arijit-mondal-211217287",
-    href: "https://www.linkedin.com/in/arijit-mondal-211217287/",
+    handle: "in/arijitmondal25",
+    href: "https://www.linkedin.com/in/arijitmondal25",
     icon: FaLinkedin,
   },
   {

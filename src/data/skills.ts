@@ -21,15 +21,19 @@ import {
   SiPostgresql,
   SiPostman,
   SiPrisma,
-  SiPython,
+  // SiPython,
   SiReact,
   SiRedux,
   SiShadcnui,
   SiSocketdotio,
   SiTailwindcss,
   SiTypescript,
+  SiReactquery,
+  SiRedis,
+  SiClaude,
+  SiModelcontextprotocol,
+  SiLangchain,
 } from "react-icons/si";
-import { VscVscode } from "react-icons/vsc";
 
 /**
  * Skills shown as a logo grid, organized into labeled categories. Each entry
@@ -55,7 +59,7 @@ export const skillGroups: SkillGroup[] = [
       { name: "C++", icon: SiCplusplus },
       { name: "JavaScript", icon: SiJavascript },
       { name: "TypeScript", icon: SiTypescript },
-      { name: "Python", icon: SiPython },
+      // { name: "Python", icon: SiPython },
     ],
   },
   {
@@ -66,9 +70,10 @@ export const skillGroups: SkillGroup[] = [
       { name: "React.js", icon: SiReact },
       { name: "Next.js", icon: SiNextdotjs },
       { name: "Tailwind CSS", icon: SiTailwindcss },
-      { name: "Shadcn UI", icon: SiShadcnui },
+      { name: "Shadcn/UI", icon: SiShadcnui },
       { name: "Motion", icon: SiFramer },
       { name: "Redux", icon: SiRedux },
+      { name: "Tanstack Query", icon: SiReactquery },
     ],
   },
   {
@@ -76,37 +81,35 @@ export const skillGroups: SkillGroup[] = [
     skills: [
       { name: "Node.js", icon: SiNodedotjs },
       { name: "Express.js", icon: SiExpress },
+      { name: "Mongoose", icon: SiMongoose },
+      { name: "Prisma", icon: SiPrisma },
+      { name: "Drizzle", icon: SiDrizzle },
       { name: "Socket.IO", icon: SiSocketdotio },
       { name: "REST APIs", icon: LuNetwork },
       { name: "JWT Auth", icon: SiJsonwebtokens },
+      { name: "MCP", icon: SiModelcontextprotocol },
+      { name: "LangChain", icon: SiLangchain },
     ],
   },
   {
-    category: "Databases & ORMs",
+    category: "Database",
     skills: [
       { name: "MongoDB", icon: SiMongodb },
       { name: "MySQL", icon: SiMysql },
       { name: "PostgreSQL", icon: SiPostgresql },
+      { name: "Redis", icon: SiRedis },
       { name: "Vector DB (Pinecone)", icon: LuDatabase },
-      { name: "Mongoose", icon: SiMongoose },
-      { name: "Prisma", icon: SiPrisma },
-      { name: "Drizzle", icon: SiDrizzle },
     ],
   },
   {
-    category: "DevOps & Cloud",
+    category: "Cloud & Tools",
     skills: [
       { name: "AWS", icon: FaAws },
       { name: "Docker", icon: SiDocker },
-    ],
-  },
-  {
-    category: "Tools",
-    skills: [
       { name: "Git", icon: SiGit },
       { name: "GitHub", icon: SiGithub },
-      { name: "VS Code", icon: VscVscode },
       { name: "Postman", icon: SiPostman },
+      { name: "Claude Code", icon: SiClaude },
     ],
   },
 ];
