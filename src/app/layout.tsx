@@ -18,43 +18,77 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
-const title = "Arijit Mondal — Full-Stack & Web3 Developer";
+const title = "Arijit Mondal | Full-Stack Developer";
 const description =
-  "Portfolio of Arijit Mondal, a Full-Stack & Web3 developer building reliable, scalable web systems.";
+  "Portfolio of Arijit Mondal, a Full-Stack Developer building modern, scalable web applications with React, Next.js, TypeScript, Node.js, PostgreSQL, and AI-powered technologies.";
 
 export const metadata: Metadata = {
   // Resolves relative metadata URLs (including the generated OG image).
   metadataBase: new URL(siteUrl),
   title: {
     default: title,
-    template: "%s · Arijit Mondal",
+    template: "%s | Arijit Mondal",
   },
   description,
   keywords: [
     "Arijit Mondal",
+    "Arijit Mondal Portfolio",
     "Full-Stack Developer",
-    "Web3 Developer",
-    "Next.js",
-    "React",
+    "Full Stack Web Developer",
+    "Frontend Developer",
+    "Backend Developer",
+    "Web Developer",
+    "Software Developer",
+    "JavaScript",
     "TypeScript",
-    "Solana",
+    "React",
+    "Next.js",
+    "Node.js",
+    "Express.js",
+    "MongoDB",
+    "PostgreSQL",
+    "Tailwind CSS",
+    "Redux Toolkit",
+    "AWS",
+    "REST API",
+    "AI Applications",
+    "RAG Developer",
+    "Generative AI",
+    "SaaS Development",
     "Portfolio",
+    "Developer Portfolio",
+    "Open Source",
   ],
   authors: [{ name: "Arijit Mondal" }],
   creator: "Arijit Mondal",
   alternates: { canonical: "/" },
+  icons: {
+    icon: "/favicon.png",
+    shortcut: "/favicon.png",
+    apple: "/favicon.png",
+  },
   openGraph: {
     type: "website",
     url: siteUrl,
     siteName: "Arijit Mondal",
     title,
     description,
+    images: [
+      {
+        url: `${siteUrl}/profile.png`,
+        width: 1200,
+        height: 630,
+        alt: "Arijit Mondal Portfolio",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title,
     description,
-    creator: "@arijit_mondal",
+    creator: "@arijit_m_000999",
+    site: "@arijit_m_000999",
+    images: [`${siteUrl}/profile.png`],
   },
 };
 
