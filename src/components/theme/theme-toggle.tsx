@@ -90,7 +90,7 @@ export function ThemeToggle() {
     <Button
       variant="outline"
       size="icon"
-      className="rounded-full"
+      className="rounded-full hover:cursor-pointer"
       onClick={(event) =>
         changeThemeWithReveal(
           () => setTheme(isDark ? "light" : "dark"),

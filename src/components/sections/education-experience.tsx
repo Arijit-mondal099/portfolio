@@ -24,11 +24,11 @@ export function EducationExperience() {
       <Tabs value={tab} onValueChange={setTab}>
         <Reveal>
           <TabsList className="grid w-full grid-cols-2">
-            <TabsTrigger value="experience">
+            <TabsTrigger value="experience" className={"hover:cursor-pointer"}>
               <Briefcase />
               Experience
             </TabsTrigger>
-            <TabsTrigger value="education">
+            <TabsTrigger value="education" className={"hover:cursor-pointer"}>
               <GraduationCap />
               Education
             </TabsTrigger>
