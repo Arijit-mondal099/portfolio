@@ -26,12 +26,13 @@ export interface Profile {
 
 export const profile: Profile = {
   name: "Arijit Mondal",
-  tagline: ["Breaking code since birth...", "You're welcome :)"],
+  tagline: ["Building things that work...", "You're welcome :)"],
   about:
-    "A Full-Stack & Web3 developer interested in building and understanding " +
-    "reliable, scalable web systems. I enjoy working across the stack, from " +
-    "user-facing interfaces to backend and blockchain logic, with a focus on " +
-    "clean architecture and predictable behavior.",
+    "Full-Stack Developer building reliable, scalable web systems with AI " +
+    "at the core. I work across the stack, from user-facing interfaces to " +
+    "backend architecture and AI integrations like RAG pipelines and " +
+    "LLM-powered features, with a focus on clean architecture and " +
+    "predictable behavior.",
   avatar: { src: "/profile.png", alt: "Arijit Mondal" },
   resumeUrl: "/resume.pdf",
   contactHref: "#contact",
