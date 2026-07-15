@@ -32,7 +32,7 @@ export const projects: Project[] = [
     description:
       "Full-stack doctor appointment booking system with role-based dashboards, JWT auth, and Razorpay payment integration.",
     image: "/projects/project-2.png",
-    demoUrl: "https://health-frontend-c4x4.onrender.com",
+    demoUrl: "https://health-blond-tau.vercel.app",
     sourceUrl: "https://github.com/Arijit-mondal099/health",
   },
   {
