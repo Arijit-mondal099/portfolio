@@ -6,7 +6,7 @@ Project-specific guide. For general engineering behavior, see
 ## Quick start
 
 ```sh
-pnpm install          # Node >=20.9 (pinned in .nvmrc: 24)
+pnpm install          # Node >=20.9 (pinned in .nvmrc: 24; pnpm@11.5.1 in package.json)
 pnpm dev              # http://localhost:3000
 pnpm build            # production build
 pnpm lint             # ESLint v9 flat config (eslint.config.mjs)
@@ -19,12 +19,13 @@ No test framework is configured.
 
 ## Framework & tooling
 
-- **Next.js 16.2.9** (App Router) + **React 19**, shipped via **pnpm only**.
+- **Next.js 16.2.9** (App Router) + **React 19**, shipped via **pnpm only** (pnpm@11.5.1 pinned in package.json).
 - **Tailwind CSS v4** — no `tailwind.config.js`. Config is inline in `src/app/globals.css` via `@theme inline`. PostCSS plugin: `@tailwindcss/postcss`.
-- **shadcn/ui** (base-nova style) on `@base-ui/react` primitives. Add via `pnpm dlx shadcn@latest add <name>`.
+- **shadcn/ui** (base-nova style, `baseColor: "neutral"`, `cssVariables: true`) on `@base-ui/react` primitives. Add via `pnpm dlx shadcn@latest add <name>`. Config in `components.json`.
 - **ESLint v9 flat config** in `eslint.config.mjs` (ignores `.next/`, `out/`, `build/`, `next-env.d.ts`).
 - **Prettier** with `prettier-plugin-tailwindcss`. Double quotes, semicolons, trailingComma: es5, tabWidth: 2, printWidth: 80.
 - `.npmrc` sets `engine-strict=true` and `auto-install-peers=true`. Build approvals for `sharp`+`unrs-resolver` in `pnpm-workspace.yaml`.
+- **CI** uses a shared setup action (`.github/actions/setup`) that installs Node (via `.nvmrc`), enables Corepack, caches pnpm store, and runs `pnpm install --frozen-lockfile`.
 
 ## Architecture
 
@@ -72,3 +73,4 @@ Hero → About → Education & Experience (tabbed timeline) → Skills → Proje
 - `CLAUDE.md` is tracked in git (general behavioral guidelines).
 - **CI** (`.github/workflows/ci.yml`): lint, typecheck, build, commitlint. Vercel deploy lives outside the repo.
 - No `.env` files tracked (`.env*` gitignored; `.env.local` for secrets).
+- `.claude/settings.local.json` grants permission for `Bash(pnpm exec *)` commands. Skills live in `.claude/skills/` and are loaded automatically by the agent.

@@ -154,10 +154,10 @@ export const education: TimelineGroup[] = [
     entries: [
       {
         title:
-          "B.Tech in Computer Science and Engineering (CSE) — Maulana Abul Kalam Azad University of Technology, West Bengal (AICTE)",
+          "B.Tech in Computer Science and Engineering (CSE) — Maulana Abul Kalam Azad University of Technology, West Bengal (MAKAUT, WB)",
         start: "2026-06",
         end: "2029-05",
-        description: "Currently in 2nd year.",
+        description: "Currently pursuing B.Tech (2nd Year).",
         bullets: [],
       },
     ],
@@ -168,10 +168,11 @@ export const education: TimelineGroup[] = [
     current: false,
     entries: [
       {
-        title: "Diploma in Computer Science and Technology (WBSCTE)",
+        title:
+          "Diploma in Computer Science and Technology (CST) — West Bengal State Council of Technical & Vocational Education and Skill Development (WBSCT&VE&SD)",
         start: "2023-06",
         end: "2026-05",
-        bullets: ["GPA: 7.5"],
+        bullets: ["CGPA: 7.50/10"],
       },
     ],
   },
