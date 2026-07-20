@@ -27,12 +27,12 @@ type ViewTransitionDocument = Document & {
 };
 
 /**
- * Apply a theme change with a circular reveal that grows from (x, y) — the
- * toggle's position — out to the farthest corner, via the View Transitions API.
+ * Apply a theme change with a circular reveal via the View Transitions API.
+ * The clip-path grows from the center of the viewport outward.
  * Falls back to an instant swap when the API is unavailable (e.g. Firefox) or
  * the user prefers reduced motion.
  */
-function changeThemeWithReveal(apply: () => void, x: number, y: number) {
+function changeThemeWithReveal(apply: () => void) {
   const doc = document as ViewTransitionDocument;
   const prefersReduced = window.matchMedia(
     "(prefers-reduced-motion: reduce)"
@@ -43,24 +43,12 @@ function changeThemeWithReveal(apply: () => void, x: number, y: number) {
     return;
   }
 
-  // Radius from the toggle to the most distant corner (bottom-left when the
-  // toggle is top-right) so the reveal covers the whole viewport.
-  const endRadius = Math.hypot(
-    Math.max(x, window.innerWidth - x),
-    Math.max(y, window.innerHeight - y)
-  );
-
-  // flushSync so next-themes swaps the class synchronously inside the
-  // transition callback (otherwise the snapshot is taken before it applies).
   const transition = doc.startViewTransition(() => flushSync(apply));
 
   void transition.ready.then(() => {
     document.documentElement.animate(
       {
-        clipPath: [
-          `circle(0px at ${x}px ${y}px)`,
-          `circle(${endRadius}px at ${x}px ${y}px)`,
-        ],
+        clipPath: ["circle(0.0% at 50% 50%)", "circle(71.0% at 50% 50%)"],
       },
       {
         duration: 450,
@@ -91,12 +79,8 @@ export function ThemeToggle() {
       variant="outline"
       size="icon"
       className="rounded-full hover:cursor-pointer"
-      onClick={(event) =>
-        changeThemeWithReveal(
-          () => setTheme(isDark ? "light" : "dark"),
-          event.clientX,
-          event.clientY
-        )
+      onClick={() =>
+        changeThemeWithReveal(() => setTheme(isDark ? "light" : "dark"))
       }
       aria-label={`Switch to ${isDark ? "light" : "dark"} theme`}
     >
