@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { JetBrains_Mono } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
+
 import { Footer } from "@/components/layout/footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { Toaster } from "@/components/ui/sonner";
@@ -121,6 +123,12 @@ export default function RootLayout({
           {/* Toasts follow the active theme (sonner reads next-themes). */}
           <Toaster />
         </Providers>
+
+        {/* chatbot script */}
+        <Script
+          src="https://supportai-seven.vercel.app/chat_bot.js"
+          data-bot-id="6a34ecbbc0fd98c3e97222cf"
+        />
       </body>
     </html>
   );
