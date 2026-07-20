@@ -57,7 +57,7 @@ Hero → About → Education & Experience (tabbed timeline) → Skills → Proje
 Runs automatically via `husky` on commit. Do not attempt `--no-verify` or amend:
 
 - **pre-commit**: `pnpm exec lint-staged` — ESLint + Prettier on staged `.ts/.tsx/.js/.jsx/.mjs/.cjs`; Prettier on `.json/.css/.md`.
-- **commit-msg**: `pnpm exec commitlint --edit` — enforces conventional commits (`feat:`, `fix:`, `chore:`, etc.). Config at `commitlint.config.mjs`.
+- **commit-msg**: `pnpm exec commitlint --edit "$1"` — enforces conventional commits (`feat:`, `fix:`, `chore:`, etc.). Config at `commitlint.config.mjs`.
 
 ## Git & PR workflow
 
@@ -73,7 +73,7 @@ Runs automatically via `husky` on commit. Do not attempt `--no-verify` or amend:
 
 ## Environment
 
-- No `.env` files tracked (`.env*` gitignored; `.env.local` for secrets).
-- `.env.example` documents the 3 variables: `RESEND_API_KEY`, `CONTACT_TO_EMAIL`, `NEXT_PUBLIC_SITE_URL`.
+- `.env*` is gitignored (`.env.local` for secrets); `.env.example` is tracked as the template.
+- Three variables documented in `.env.example`: `RESEND_API_KEY`, `CONTACT_TO_EMAIL`, `NEXT_PUBLIC_SITE_URL`.
 - `pnpm-workspace.yaml` allows builds for `sharp` and `unrs-resolver`.
 - Vercel deploy lives outside the repo (not in CI).
