@@ -229,7 +229,7 @@ html::-webkit-scrollbar {
 
 /*
  * Theme-change reveal. The toggle wraps the swap in the View Transitions API and
- * animates a clip-path circle growing from the toggle (top-right). Disable the
+ * animates a clip-path circle growing from the viewport center (50% 50%). Disable the
  * default cross-fade so only the new theme's circular reveal plays, and stack
  * the incoming theme on top so it wipes over the outgoing one.
  */

@@ -1,7 +1,7 @@
 ---
 description: Branch, split staged/unstaged changes into atomic commits, push, and give a pre-filled PR link
 argument-hint: [optional branch-name]
-allowed-tools: Bash(git:*), Bash(python3:*)
+allowed-tools: Bash(git:*)
 ---
 
 Branch name override (if given): $ARGUMENTS
@@ -11,10 +11,12 @@ on branch naming, commit grouping, or which base branch to target if detection f
 
 ## Phase 1: Check state
 
-1. Run `git status` and `git diff` (and `git diff --cached`) to see all changes —
-   staged, unstaged, and untracked.
-2. If there are no changes at all, stop and tell the user there's nothing to open a PR for.
-3. Confirm you're not already on the base branch (main/master) with uncommitted
+1. Run `git status --porcelain` and `git diff` (and `git diff --cached`) to see
+   all changes — staged, unstaged, and explicitly listed untracked paths.
+2. For every untracked path, read its contents before staging. Check for secrets
+   and confirm it is relevant to the PR before including it in a commit.
+3. If there are no changes at all, stop and tell the user there's nothing to open a PR for.
+4. Confirm you're not already on the base branch (main/master) with uncommitted
    changes you're about to commit directly to it — if so, branching is mandatory
    before committing anything.
 
@@ -26,7 +28,11 @@ on branch naming, commit grouping, or which base branch to target if detection f
    it has no prefix). Otherwise generate a short kebab-case name from the actual
    diff content (e.g. `fix/password-retry-reset`) — don't use a generic name like
    `update-code`.
-3. `git checkout -b <branch-name>` from the current base.
+3. Stash the working tree (`git stash`), switch to the detected base branch
+   (`git checkout <base>`), then create the new branch (`git checkout -b
+<branch-name>`). If switching safely is not possible (dirty state, merge
+   conflicts), stop and ask the user instead of creating the branch from the
+   current position.
 
 ## Phase 3: Atomic commits
 
@@ -47,8 +53,8 @@ on branch naming, commit grouping, or which base branch to target if detection f
    (`git@github.com:owner/repo.git`) or HTTPS (`https://github.com/owner/repo.git`) form.
 3. Write a PR title (one line) and body (bullet summary of what changed and why,
    based on the commits made) in markdown.
-4. URL-encode the title and body with:
-   `python3 -c "import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1]))" "<text>"`
+4. URL-encode the title and body with PowerShell:
+   `[System.Uri]::EscapeDataString("<text>")`
 5. Build and print this link:
    `https://github.com/<owner>/<repo>/compare/<base>...<branch-name>?expand=1&title=<encoded-title>&body=<encoded-body>`
 

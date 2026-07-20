@@ -1,7 +1,7 @@
 ---
 description: Investigate the codebase, propose a fix plan for a bug, then implement it after approval
 argument-hint: [bug description]
-allowed-tools: Read, Grep, Glob, Bash, Edit, Write
+allowed-tools: Read, Grep, Glob
 ---
 
 Bug to investigate: $ARGUMENTS
@@ -33,7 +33,12 @@ until the user responds.
 If the user requests changes to the plan, revise and re-present it — still no
 code changes — until they approve.
 
-## Phase 3: Implement (only after explicit approval)
+## Phase 3: Approval to implement
+
+Ask the user: _"Approve enabling mutation tools (Bash, Edit, Write) to proceed
+with implementation?"_ Wait for an explicit yes before continuing.
+
+## Phase 4: Implement (only after explicit approval)
 
 - Make exactly the changes described in the approved plan. Nothing more —
   no adjacent cleanup, no "while I'm here" improvements.
