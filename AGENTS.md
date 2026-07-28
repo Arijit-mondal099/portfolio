@@ -21,8 +21,9 @@ No test framework configured.
 - **Next.js 16.2.9** (App Router) + **React 19**. pnpm only (pinned `11.5.1` in `packageManager`).
 - **Tailwind CSS v4** — no `tailwind.config.js`. Config inline in `src/app/globals.css` via `@theme inline`. PostCSS plugin: `@tailwindcss/postcss`.
 - **shadcn/ui** (base-nova, `baseColor: neutral`, `cssVariables: true`) on `@base-ui/react`. Add with `pnpm dlx shadcn@latest add <name>`. Config in `components.json`.
+- **motion** v12 (formerly framer-motion) — scroll-triggered and route-transition animations. Constants/variants at `src/lib/motion.ts`.
 - **ESLint v9** flat config in `eslint.config.mjs` (ignores `.next/`, `out/`, `build/`, `next-env.d.ts`).
-- **Prettier** with `prettier-plugin-tailwindcss`. Double quotes, semicolons, trailingComma: es5, tabWidth: 2, printWidth: 80. Stylesheet path set in `.prettierrc.json`.
+- **Prettier** with `prettier-plugin-tailwindcss` (config in `.prettierrc.json`).
 - **CI** (`.github/workflows/ci.yml`): 4 parallel jobs — lint (ESLint + Prettier check), typecheck, build, commitlint. Commitlint runs only on PRs; lint includes `format:check`.
 
 ## Architecture
@@ -46,7 +47,7 @@ Hero → About → Education & Experience (tabbed timeline) → Skills → Proje
 - **react-hook-form** + **Zod** (`@hookform/resolvers`) — shared schema at `src/lib/validations.ts`.
 - **sonner** — toast notifications for contact form feedback.
 - **react-activity-calendar** — GitHub contributions heatmap.
-- **react-icons** (`react-icons/fa6`) — brand icons. `lucide-react` for UI icons (sun, moon, X, Code2, GraduationCap).
+- **react-icons** (`fa6`) — brand icons. `lucide-react` — UI icons.
 
 ## Data flow quirks
 
@@ -69,6 +70,7 @@ Runs automatically via `husky` on commit. Do not attempt `--no-verify` or amend:
 
 - `.claude/settings.local.json` pre-approves `Bash(pnpm exec *)` commands.
 - Skills in `.claude/skills/` are loaded automatically by the agent.
+- Commands in `.claude/commands/` define reusable workflows: `open-pr.md` (branch + atomic commits + push + PR link) and `fix-bug.md` (investigate → plan → approval gate → implement).
 - `CLAUDE.md` tracked in git (general behavioral guidelines).
 
 ## Environment

@@ -1,32 +1,115 @@
+<div align="center">
+
 # Portfolio
 
-A personal developer portfolio for **Arijit Mondal** — a dark, terminal-style
-single-page site built with Next.js. It showcases an intro, GitHub
-contributions, skills, projects, and a working contact form.
+A data-driven personal portfolio for **Arijit Mondal**, a full-stack developer
+building modern, scalable web applications with React, Next.js, TypeScript,
+Node.js, and AI-powered technologies.
 
-## Tech stack
+![Next.js 16](https://img.shields.io/badge/Next.js-16-000?logo=next.js)
+![React 19](https://img.shields.io/badge/React-19-58c4dc?logo=react)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-3178c6?logo=typescript)
+![Tailwind CSS v4](https://img.shields.io/badge/Tailwind_CSS-v4-06b6d4?logo=tailwindcss)
+![shadcn/ui](https://img.shields.io/badge/shadcn/ui-base--nova-000?logo=shadcnui)
+![motion](https://img.shields.io/badge/motion-v12-0055ff?logo=framer)
+![pnpm](https://img.shields.io/badge/pnpm-11.5.1-f69220?logo=pnpm)
+![ESLint](https://img.shields.io/badge/ESLint-9-4b32c3?logo=eslint)
+![Prettier](https://img.shields.io/badge/Prettier-3-f7b93e?logo=prettier)
+![Resend](https://img.shields.io/badge/Resend-000?logo=resend)
 
-- **[Next.js 16](https://nextjs.org/)** (App Router) + **React 19** + **TypeScript**
-- **[Tailwind CSS v4](https://tailwindcss.com/)** (CSS-first config, no `tailwind.config.js`)
-- **[shadcn/ui](https://ui.shadcn.com/)** (`base-nova` style, built on Base UI)
-- **[TanStack Query](https://tanstack.com/query)** — server-side data fetching
-- **[react-hook-form](https://react-hook-form.com/)** + **[Zod](https://zod.dev/)** — form validation
-- **[Resend](https://resend.com/)** — contact-form email delivery
-- **[react-activity-calendar](https://github.com/grubersjoe/react-activity-calendar)** — GitHub contributions heatmap
-- **JetBrains Mono** via `next/font`
-- **pnpm**, ESLint, Prettier, Husky + lint-staged + commitlint
+</div>
 
-## Features
+<div align="center">
+  <img src="./public/demo.png" alt="Portfolio Demo" width="700" />
+</div>
 
-- **Hero + About** — intro, tagline, résumé/contact CTAs, avatar
-- **GitHub contributions** — yearly heatmap fetched server-side via React Query
-- **Skills** — pill-badge grid
-- **Projects** — card grid (2-up) with a dedicated `/projects` page
-- **Contact** — validated form that emails via Resend, with toast feedback
-- **SEO** — Open Graph image, sitemap, robots, canonical metadata
-- Dark-only theme, fully responsive
+## 📑 Table of Contents
 
-## Getting started
+- [✨ Features](#features)
+- [🛠️ Tech Stack](#tech-stack)
+- [🚀 Getting Started](#getting-started)
+- [📁 Project Structure](#project-structure)
+- [📜 Scripts](#scripts)
+- [☁️ Deployment](#deployment)
+- [🎨 Customization](#customization)
+
+## ✨ Features
+
+- 👤 **Hero + About** — Name, tagline, avatar, and bio with CTA links to contact
+  and resume download.
+- 🎓 **Education & Experience** — Tabbed timeline component showing work history
+  and academic background, each entry with date range, description, and tech
+  tags.
+- 🛠️ **Skills** — Categorized auto-scrolling marquees of skill badges with brand
+  icons (Languages, Frontend, Backend, Database, Cloud & Tools).
+- 🗂️ **Projects** — Card grid previewing 2 featured projects on the home page with
+  a dedicated `/projects` page listing all 6 projects (demo and source links).
+- 📊 **GitHub Contributions** — Yearly contribution heatmap fetched server-side
+  through TanStack Query and proxied from the GitHub Contributions API.
+- 📬 **Contact Form** — Validated form (react-hook-form + Zod) that sends email
+  via the Resend API. Social links (GitHub, LinkedIn, X/Twitter, Email, Phone)
+  displayed alongside the form.
+- 🌓 **Dual Theme** — Light and dark mode with system preference detection and an
+  animated circular-reveal transition via the View Transitions API.
+- 🎬 **Motion Animations** — Scroll-triggered reveals, staggered child entrances,
+  auto-scrolling marquees, and route-transition fades powered by motion v12.
+- 🔍 **SEO** — Dynamic sitemap (`/sitemap.xml`), robots.txt, Open Graph image, and
+  canonical metadata generated from data files.
+- 🤖 **AI Chatbot** — Embedded SupportAI chatbot on every page for interactive
+  assistance.
+- 📱 **Responsive** — Single-column centered layout with a sticky footer, adapts
+  to all screen sizes.
+- 🗃️ **Data-Driven** — All content lives in `src/data/` — edit the data files to
+  update copy, skills, projects, and links without touching components.
+
+## 🛠️ Tech Stack
+
+### ⚛️ Framework & Language
+
+|                |                                                 |
+| -------------- | ----------------------------------------------- |
+| **Framework**  | [Next.js 16](https://nextjs.org/) (App Router)  |
+| **UI Library** | [React 19](https://react.dev/)                  |
+| **Language**   | [TypeScript 5](https://www.typescriptlang.org/) |
+| **Font**       | JetBrains Mono via `next/font`                  |
+
+### 🎨 UI & Styling
+
+|                |                                                                                                                         |
+| -------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| **CSS**        | [Tailwind CSS v4](https://tailwindcss.com/) (CSS-first config, `@theme inline` in `globals.css`)                        |
+| **Components** | [shadcn/ui](https://ui.shadcn.com/) (base-nova, on [@base-ui/react](https://base-ui.com/))                              |
+| **Icons**      | [react-icons](https://react-icons.github.io/react-icons/) (FA6 brands) + [lucide-react](https://lucide.dev/) (UI icons) |
+| **Animation**  | [motion v12](https://motion.dev/) (formerly Framer Motion)                                                              |
+
+### 🔄 State & Data
+
+|                   |                                                                                  |
+| ----------------- | -------------------------------------------------------------------------------- |
+| **Data Fetching** | [TanStack Query v5](https://tanstack.com/query)                                  |
+| **Theme**         | [next-themes](https://github.com/pacocoursey/next-themes) (class-based)          |
+| **Forms**         | [react-hook-form](https://react-hook-form.com/) + [Zod](https://zod.dev/)        |
+| **Toasts**        | [sonner](https://sonner.emilkowalski.com/)                                       |
+| **GH Heatmap**    | [react-activity-calendar](https://github.com/grubersjoe/react-activity-calendar) |
+
+### ⚙️ Backend & Infrastructure
+
+|             |                                                     |
+| ----------- | --------------------------------------------------- |
+| **Email**   | [Resend](https://resend.com/) (`POST /api/contact`) |
+| **Chatbot** | SupportAI embedded script                           |
+
+### 🔧 Tooling
+
+|                     |                                                           |
+| ------------------- | --------------------------------------------------------- |
+| **Package Manager** | pnpm 11.5.1 (pinned via `packageManager`)                 |
+| **Linting**         | ESLint v9 (flat config)                                   |
+| **Formatting**      | Prettier 3 + `prettier-plugin-tailwindcss`                |
+| **Git Hooks**       | Husky 9 + lint-staged + commitlint (conventional commits) |
+| **Node**            | `>=20.9` (`.nvmrc` pins Node 24)                          |
+
+## 🚀 Getting Started
 
 ```bash
 # 1. Install dependencies
@@ -35,59 +118,108 @@ pnpm install
 # 2. Set up environment variables
 cp .env.example .env.local   # then fill in the values
 
-# 3. Run the dev server
-pnpm dev                     # http://localhost:3000
+# 3. Start the development server
+pnpm dev                     # → http://localhost:3000
 ```
 
-> Requires **Node ≥ 20.9** and **pnpm**.
+> ⚠️ Requires **Node >= 20.9** and **pnpm**. The project enforces both via
+> `engine-strict=true` in `.npmrc` and will refuse to install on a mismatched
+> version.
 
-### Environment variables
+### 🔐 Environment Variables
 
-| Variable               | Required | Description                                             |
-| ---------------------- | -------- | ------------------------------------------------------- |
-| `RESEND_API_KEY`       | yes\*    | Resend API key for the contact form (`/api/contact`).   |
-| `CONTACT_TO_EMAIL`     | no       | Recipient for contact messages (defaults to the owner). |
-| `NEXT_PUBLIC_SITE_URL` | no       | Canonical site URL for sitemap/robots/SEO.              |
+| Variable               | Required | Description                                                                                                             |
+| ---------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------- |
+| `RESEND_API_KEY`       | Yes      | Resend API key for the contact form (`/api/contact`). Create one at [resend.com/api-keys](https://resend.com/api-keys). |
+| `CONTACT_TO_EMAIL`     | No       | Recipient address for contact messages. Defaults to the owner's email.                                                  |
+| `NEXT_PUBLIC_SITE_URL` | No       | Canonical site URL — used by the sitemap, robots.txt, and SEO metadata.                                                 |
 
-\* The contact form's UI works without it; sending email requires a key.
-
-## Scripts
-
-```bash
-pnpm dev            # start the dev server
-pnpm build          # production build
-pnpm start          # run the production build
-pnpm lint           # ESLint
-pnpm format         # Prettier (write)
-pnpm format:check   # Prettier (check)
-```
-
-## Project structure
+## 📁 Project Structure
 
 ```
 src/
-  app/         layout, pages, api/ routes, sitemap/robots/opengraph
-  components/  section components + ui/ (shadcn primitives)
-  data/        profile, skills, projects, socials, github  (edit content here)
-  lib/         utils, validations, site config
-public/        images, project thumbnails
+├── app/
+│   ├── api/
+│   │   ├── contact/          POST /api/contact (Resend email)
+│   │   └── contributions/    GET /api/contributions (GH heatmap proxy)
+│   ├── projects/             /projects — full project listing page
+│   ├── globals.css           Tailwind v4 theme + base styles
+│   ├── layout.tsx            Root layout (header, footer, providers, chatbot)
+│   ├── opengraph-image.tsx   Dynamic OG image (next/og)
+│   ├── page.tsx              Home page — composes all sections
+│   ├── providers.tsx         ThemeProvider + QueryClientProvider + MotionConfig
+│   ├── robots.ts             /robots.txt
+│   ├── sitemap.ts            /sitemap.xml
+│   └── template.tsx          Route transition animation (fade in)
+├── components/
+│   ├── contact/              ContactForm component
+│   ├── layout/               SiteHeader, Footer, Section, SectionNav
+│   ├── motion/               Reveal, Stagger, Marquee animation wrappers
+│   ├── projects/             ProjectGrid (shared card grid)
+│   ├── sections/             Hero, About, Skills, Projects, Contributions,
+│   │                         Contact, EducationExperience
+│   ├── theme/                ThemeToggle
+│   ├── timeline/             Timeline component
+│   └── ui/                   shadcn/ui primitives (button, card, dialog, …)
+├── data/
+│   ├── profile.ts            Name, tagline, bio, avatar, resume link
+│   ├── projects.ts           Project list (title, desc, image, demo/source URLs)
+│   ├── skills.ts             Skill groups with brand icons
+│   ├── socials.ts            Contact links (GitHub, LinkedIn, X, Email, Phone)
+│   ├── timeline.ts           Experience + education entries
+│   └── github.ts             GitHub username
+└── lib/
+    ├── date.ts               Date formatting helpers
+    ├── motion.ts             Shared animation constants and variants
+    ├── site.ts               Canonical site URL
+    ├── utils.ts              cn() utility (clsx + tailwind-merge)
+    └── validations.ts        Zod schema for the contact form
+
+public/
+├── favicon.png
+├── profile.png               Avatar image
+├── resume.pdf                Downloadable resume
+├── logos/                    Institution/company logos (3)
+└── projects/                 Project thumbnail images (6)
 ```
 
-Content is **data-driven** — edit the files in `src/data/` to update copy,
-skills, projects, and links rather than touching components.
+> 📝 Content is **data-driven** — edit the files in `src/data/` to update copy,
+> skills, projects, and links rather than touching components.
 
-## Customization checklist
+## 📜 Scripts
 
-- Replace `public/profile.png` with a real photo and add `public/resume.pdf`.
-- Swap the placeholder thumbnails in `public/projects/`.
-- Update LinkedIn / X URLs and handles in `src/data/socials.ts`.
-- Set the real demo/source links in `src/data/projects.ts`.
+| Command             | Description                                   |
+| ------------------- | --------------------------------------------- |
+| `pnpm dev`          | Start the development server (port 3000)      |
+| `pnpm build`        | Production build                              |
+| `pnpm start`        | Run the production build                      |
+| `pnpm lint`         | Run ESLint                                    |
+| `pnpm typecheck`    | Run TypeScript type checking (`tsc --noEmit`) |
+| `pnpm format`       | Format all files with Prettier                |
+| `pnpm format:check` | Check formatting (CI-friendly)                |
 
-## Deployment
+## ☁️ Deployment
 
-Deploy on **[Vercel](https://vercel.com/)**: import the repo, add the
-environment variables above, and ship. The app builds with `pnpm build`.
+The project builds with `pnpm build` and is ready for deployment on
+[Vercel](https://vercel.com/):
 
-## License
+1. 📤 Push the repository to GitHub.
+2. 📥 Import the repo into Vercel.
+3. 🔑 Set the three environment variables (`RESEND_API_KEY`, `CONTACT_TO_EMAIL`,
+   `NEXT_PUBLIC_SITE_URL`) in the Vercel dashboard.
+4. 🚀 Deploy.
 
-Personal project — all rights reserved.
+> **TODO:** A live demo URL is not confirmed. The canonical site URL defaults
+> to `https://arijit-mondal.vercel.app` when unset — set `NEXT_PUBLIC_SITE_URL`
+> in your production environment to enable correct SEO metadata.
+
+## 🎨 Customization
+
+1. 🖼️ Replace `public/profile.png` with your own avatar.
+2. 📄 Replace `public/resume.pdf` with your own resume.
+3. 🔗 Update `src/data/socials.ts` with your LinkedIn, X, and other handles.
+4. 🗂️ Update `src/data/projects.ts` with your real project links and replace
+   thumbnail images in `public/projects/`.
+5. 💼 Update `src/data/timeline.ts` with your own experience and education.
+6. 🛠️ Update `src/data/skills.ts` to add or remove skill entries.
+7. ✏️ Update `src/data/profile.ts` to change the name, tagline, and bio.
