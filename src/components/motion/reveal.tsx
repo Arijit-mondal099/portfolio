@@ -2,6 +2,7 @@
 
 import { motion, type HTMLMotionProps } from "motion/react";
 
+import { useLoadingGate } from "@/components/loading/loading-gate";
 import { fadeUp, transition } from "@/lib/motion";
 
 /** Intrinsic tags the motion primitives can render as. */
@@ -47,12 +48,15 @@ export function Reveal({
   amount = VIEWPORT_AMOUNT,
 }: RevealProps) {
   const Tag = motion[as] as React.ComponentType<HTMLMotionProps<"div">>;
+  // Defer the scroll entrance until the splash is gone so an above-the-fold
+  // section (e.g. About) doesn't finish animating invisibly behind the overlay.
+  const { done } = useLoadingGate();
 
   return (
     <Tag
       className={className}
       initial="hidden"
-      whileInView="visible"
+      whileInView={done ? "visible" : undefined}
       viewport={{ once, amount }}
       variants={fadeUp}
       transition={{ ...transition, delay }}

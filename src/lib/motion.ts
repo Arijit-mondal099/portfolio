@@ -11,6 +11,14 @@ import type { Transition, Variants } from "motion/react";
  */
 export const DURATION = { fast: 0.35, base: 0.55, slow: 0.8 } as const;
 
+/**
+ * Initial site splash duration (ms). Shown on the first hard page load only,
+ * then skipped for the rest of the tab session. Paired with the GIF's own
+ * play time and the pop-in/exit choreography — long enough to feel deliberate,
+ * short enough to avoid hurting first meaningful paint perception.
+ */
+export const LOADING_DURATION = 3500;
+
 export const OFFSET = { sm: 8, base: 12, lg: 16 } as const;
 
 /** Gentle ease-out; tuple form so it satisfies motion's `Easing` type. */
