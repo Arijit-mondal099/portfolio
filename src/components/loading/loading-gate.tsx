@@ -114,7 +114,13 @@ export function LoadingGate({ children }: LoadingGateProps) {
     <>
       <LoadingScreen done={done} />
       <LoadingGateContext.Provider value={{ done }}>
-        {children}
+        {/* While the splash is up, inert the page behind it so hidden content
+            can't receive focus or clicks. The flex layout lives on this wrapper
+            (body is a single flex child) so moving the column here preserves
+            header/main/footer sizing. */}
+        <div inert={!done} className="flex min-h-full flex-col">
+          {children}
+        </div>
       </LoadingGateContext.Provider>
     </>
   );
