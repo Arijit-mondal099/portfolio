@@ -4,6 +4,7 @@ import Script from "next/script";
 import "./globals.css";
 
 import { Footer } from "@/components/layout/footer";
+import { LoadingGate } from "@/components/loading/loading-gate";
 import { SiteHeader } from "@/components/layout/site-header";
 import { Toaster } from "@/components/ui/sonner";
 import { siteUrl } from "@/lib/site";
@@ -108,6 +109,22 @@ export default function RootLayout({
       className={`${jetbrainsMono.variable} h-full motion-safe:scroll-smooth`}
     >
       <body className="flex min-h-full flex-col">
+        {/* First-paint theme hint: set the light/dark class before hydration so
+            the theme token resolves correctly (no light→dark flash on first
+            load). Standard next-themes SSR pattern; the ThemeToggle still owns
+            class swaps on interaction. `suppressHydrationWarning` on <html>
+            absorbs the expected attribute difference. */}
+        <Script
+          id="theme-preload"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{
+              var t=localStorage.getItem('theme');
+              if(!t||t==='system'){t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}
+              document.documentElement.classList.add(t);
+            }catch(e){}})();`,
+          }}
+        />
         {/* Without JS the motion entrances never run, so elements rendered with
             their `initial` (hidden) state would stay at opacity:0. Reveal them. */}
         <noscript>
@@ -117,11 +134,13 @@ export default function RootLayout({
             get theme context. The providers add no DOM, so the flex layout is
             preserved. */}
         <Providers>
-          <SiteHeader />
-          {children}
-          <Footer />
-          {/* Toasts follow the active theme (sonner reads next-themes). */}
-          <Toaster />
+          <LoadingGate>
+            <SiteHeader />
+            {children}
+            <Footer />
+            {/* Toasts follow the active theme (sonner reads next-themes). */}
+            <Toaster />
+          </LoadingGate>
         </Providers>
 
         {/* chatbot script */}

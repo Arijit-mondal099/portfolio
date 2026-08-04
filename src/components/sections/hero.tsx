@@ -4,6 +4,7 @@ import { Mail } from "lucide-react";
 import { motion } from "motion/react";
 import Image from "next/image";
 
+import { useLoadingGate } from "@/components/loading/loading-gate";
 import { ResumeDialog } from "@/components/resume-dialog";
 import { buttonVariants } from "@/components/ui/button";
 import { profile } from "@/data/profile";
@@ -17,13 +18,19 @@ import { cn } from "@/lib/utils";
  *
  * On load the pieces cascade in (name → tagline → CTAs, avatar alongside) via a
  * stagger container animating on mount rather than on scroll.
+ *
+ * Gated on the loading gate (`done`): the cascade is withheld until the splash
+ * exits, so it runs visibly right as the splash fades — otherwise the whole
+ * cascade completes invisibly behind the overlay and the hero snaps in static.
  */
 export function Hero() {
+  const { done } = useLoadingGate();
+
   return (
     <motion.section
       className="flex flex-col-reverse items-start gap-6 sm:flex-row sm:items-center sm:justify-between"
       initial="hidden"
-      animate="visible"
+      animate={done ? "visible" : "hidden"}
       variants={staggerContainer(0.1, 0.1)}
     >
       <div className="flex flex-col gap-5">

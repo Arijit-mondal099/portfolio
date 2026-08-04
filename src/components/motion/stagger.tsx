@@ -2,6 +2,7 @@
 
 import { motion, type HTMLMotionProps } from "motion/react";
 
+import { useLoadingGate } from "@/components/loading/loading-gate";
 import { staggerContainer, staggerItem } from "@/lib/motion";
 
 /** Intrinsic tags the motion primitives can render as. */
@@ -48,12 +49,14 @@ export function Stagger({
   amount = VIEWPORT_AMOUNT,
 }: StaggerProps) {
   const Tag = motion[as] as React.ComponentType<HTMLMotionProps<"div">>;
+  // Defer the scroll entrance until the splash is gone, same rationale as Reveal.
+  const { done } = useLoadingGate();
 
   return (
     <Tag
       className={className}
       initial="hidden"
-      whileInView="visible"
+      whileInView={done ? "visible" : undefined}
       viewport={{ once, amount }}
       variants={staggerContainer(stagger, delayChildren)}
     >
