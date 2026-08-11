@@ -38,7 +38,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup
-      - run: pnpm build
+      # Placeholders only — src/lib/env.ts validates these at import time, so
+      # the build needs valid-shaped values even though CI never sends mail.
+      - name: Build
+        run: pnpm build
+        env:
+          SMTP_HOST: smtp.example.com
+          SMTP_PORT: "587"
+          SMTP_USER: ci@example.com
+          SMTP_PASS: ci-placeholder-password
+          SMTP_FROM: CI <ci@example.com>
+          CONTACT_TO_EMAIL: ci@example.com
+          NEXT_PUBLIC_SITE_URL: https://example.com
+          INNGEST_DEV: "1"
 
   commitlint:
     name: Commit messages

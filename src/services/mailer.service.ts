@@ -1,36 +1,30 @@
 import { ContactInput } from "@/lib/validations";
 import nodemailer from "nodemailer";
-
-const SMTP_HOST = process.env.SMTP_HOST;
-const SMTP_PORT = Number(process.env.SMTP_PORT);
-const SMTP_USER = process.env.SMTP_USER;
-const SMTP_PASS = process.env.SMTP_PASS;
-const SMTP_FROM = process.env.SMTP_FROM;
-const CONTACT_TO_EMAIL = process.env.CONTACT_TO_EMAIL;
+import { env } from "@/lib/env";
 
 function getTransporter() {
-  if (!SMTP_HOST || !SMTP_PORT || !SMTP_USER || !SMTP_PASS || !SMTP_FROM) {
-    throw new Error("Oops mailer env not provided");
-  }
-
   return nodemailer.createTransport({
-    host: SMTP_HOST,
-    port: SMTP_PORT,
-    secure: SMTP_PORT === 465,
+    host: env.SMTP_HOST,
+    port: env.SMTP_PORT,
+    secure: env.SMTP_PORT === 465,
     auth: {
-      user: SMTP_USER,
-      pass: SMTP_PASS,
+      user: env.SMTP_USER,
+      pass: env.SMTP_PASS,
     },
   });
 }
 
-export async function sendEmail(data: ContactInput): Promise<void> {
+export async function sendEmail(
+  data: ContactInput
+): Promise<nodemailer.SentMessageInfo> {
   const transporter = getTransporter();
-  await transporter.sendMail({
-    from: SMTP_FROM,
-    to: CONTACT_TO_EMAIL ?? SMTP_FROM,
+  const info = await transporter.sendMail({
+    from: env.SMTP_FROM,
+    to: env.CONTACT_TO_EMAIL,
     replyTo: data.email,
     subject: `New contact from ${data.name}`,
     text: data.message,
   });
+
+  return info;
 }

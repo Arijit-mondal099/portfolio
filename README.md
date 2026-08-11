@@ -71,12 +71,12 @@ Node.js, and AI-powered technologies.
 
 ### 🎨 UI & Styling
 
-|                |                                                                                                                         |
-| -------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| **CSS**        | [Tailwind CSS v4](https://tailwindcss.com/) (CSS-first config, `@theme inline` in `globals.css`)                        |
-| **Components** | [shadcn/ui](https://ui.shadcn.com/) (base-nova, on [@base-ui/react](https://base-ui.com/))                              |
-| **Icons**      | [react-icons](https://react-icons.github.io/react-icons/) (FA6 brands) + [lucide-react](https://lucide.dev/) (UI icons) |
-| **Animation**  | [motion v12](https://motion.dev/) (formerly Framer Motion)                                                              |
+|                |                                                                                                                                        |
+| -------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| **CSS**        | [Tailwind CSS v4](https://tailwindcss.com/) (CSS-first config, `@theme inline` in `globals.css`)                                       |
+| **Components** | [shadcn/ui](https://ui.shadcn.com/) (base-nova, on [@base-ui/react](https://base-ui.com/))                                             |
+| **Icons**      | [react-icons](https://react-icons.github.io/react-icons/) (FA6 brands + Simple Icons) + [lucide-react](https://lucide.dev/) (UI icons) |
+| **Animation**  | [motion v12](https://motion.dev/) (formerly Framer Motion)                                                                             |
 
 ### 🔄 State & Data
 
@@ -132,8 +132,13 @@ pnpm dev                     # → http://localhost:3000
 | `SMTP_PASS`            | Yes      | SMTP authentication password.                                                                 |
 | `SMTP_FROM`            | Yes      | Sender address for outgoing contact emails (nodemailer `from`).                               |
 | `INNGEST_DEV`          | No       | Set to `1` to enable the Inngest dev server for local email testing. Run with `pnpm inngest`. |
-| `CONTACT_TO_EMAIL`     | No       | Recipient address for contact messages; falls back to `SMTP_FROM` when unset.                 |
-| `NEXT_PUBLIC_SITE_URL` | No       | Canonical site URL — used by the sitemap, robots.txt, and SEO metadata.                       |
+| `INNGEST_EVENT_KEY`    | No       | Inngest cloud event key — **required in production** (when `INNGEST_DEV` is not set).         |
+| `INNGEST_SIGNING_KEY`  | No       | Inngest cloud signing key — **required in production** (when `INNGEST_DEV` is not set).       |
+| `CONTACT_TO_EMAIL`     | Yes      | Recipient address for contact messages.                                                       |
+| `NEXT_PUBLIC_SITE_URL` | Yes      | Canonical site URL — used by the sitemap, robots.txt, and SEO metadata.                       |
+
+> Either `INNGEST_DEV=1` **or** both `INNGEST_EVENT_KEY` and `INNGEST_SIGNING_KEY`
+> must be present — the app refuses to start otherwise.
 
 ## 📁 Project Structure
 
@@ -178,7 +183,7 @@ src/
 ├── lib/
 │   ├── date.ts               Date formatting helpers
 │   ├── motion.ts             Shared animation constants and variants
-│   ├── site.ts               Canonical site URL
+│   ├── env.ts                 Zod-validated environment variables
 │   ├── utils.ts              cn() utility (clsx + tailwind-merge)
 │   └── validations.ts        Zod schema for the contact form
 └── services/
@@ -209,6 +214,7 @@ public/
 | `pnpm typecheck`    | Run TypeScript type checking (`tsc --noEmit`)                                       |
 | `pnpm format`       | Format all files with Prettier                                                      |
 | `pnpm format:check` | Check formatting (CI-friendly)                                                      |
+| `pnpm prepare`      | Install Git hooks (Husky — runs automatically on `pnpm install`)                    |
 
 ## ☁️ Deployment
 
@@ -219,12 +225,12 @@ The project builds with `pnpm build` and is ready for deployment on
 2. 📥 Import the repo into Vercel.
 3. 🔑 Set the environment variables (`SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`,
    `SMTP_PASS`, `SMTP_FROM`, `CONTACT_TO_EMAIL`, `NEXT_PUBLIC_SITE_URL`) in the
-   Vercel dashboard.
+   Vercel dashboard. For the email flow, set either `INNGEST_DEV=1` or the
+   production keys `INNGEST_EVENT_KEY` + `INNGEST_SIGNING_KEY`.
 4. 🚀 Deploy.
 
-> **TODO:** A live demo URL is not confirmed. The canonical site URL defaults
-> to `https://arijit-mondal.vercel.app` when unset — set `NEXT_PUBLIC_SITE_URL`
-> in your production environment to enable correct SEO metadata.
+> **TODO:** A live demo URL is not confirmed. Set `NEXT_PUBLIC_SITE_URL` in your
+> production environment to enable correct SEO metadata.
 
 ## 🎨 Customization
 
