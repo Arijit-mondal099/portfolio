@@ -1,14 +1,8 @@
-import { NextResponse } from "next/server";
-import { Resend } from "resend";
-
+import { inngest } from "@/inngest/client";
+import { SEND_EMAIL_EVENT } from "@/inngest/functions";
 import { contactSchema } from "@/lib/validations";
+import { NextResponse } from "next/server";
 
-/**
- * POST /api/contact
- *
- * Validates the submission with the shared schema and emails it via Resend.
- * Requires `RESEND_API_KEY`; `CONTACT_TO_EMAIL` overrides the recipient.
- */
 export async function POST(request: Request) {
   const body = await request.json().catch(() => null);
   const parsed = contactSchema.safeParse(body);
@@ -20,32 +14,18 @@ export async function POST(request: Request) {
     );
   }
 
-  const apiKey = process.env.RESEND_API_KEY;
-  if (!apiKey) {
+  try {
+    await inngest.send({
+      name: SEND_EMAIL_EVENT,
+      data: parsed.data,
+    });
+
+    return NextResponse.json({ ok: true }, { status: 200 });
+  } catch (err: unknown) {
+    console.error("Failed to send contact event:", err);
     return NextResponse.json(
-      { error: "Email service is not configured yet." },
+      { ok: false, message: "Something went wrong. Please try again." },
       { status: 500 }
     );
   }
-
-  const { name, email, message } = parsed.data;
-  const resend = new Resend(apiKey);
-
-  const { error } = await resend.emails.send({
-    // Use a verified domain in production; onboarding@resend.dev works for tests.
-    from: "Portfolio <onboarding@resend.dev>",
-    to: process.env.CONTACT_TO_EMAIL ?? "arijitm717@gmail.com",
-    replyTo: email,
-    subject: `New portfolio message from ${name}`,
-    text: `From: ${name} <${email}>\n\n${message}`,
-  });
-
-  if (error) {
-    return NextResponse.json(
-      { error: "Couldn't send your message. Please try again later." },
-      { status: 502 }
-    );
-  }
-
-  return NextResponse.json({ ok: true });
 }
