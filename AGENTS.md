@@ -75,7 +75,8 @@ Runs automatically via `husky` on commit. Do not attempt `--no-verify` or amend:
 
 ## Environment
 
-- `.env*` is gitignored (`.env.local` for secrets); `.env.example` is tracked as the template.
-- Env vars (validated in `src/lib/env.ts`): `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, `SMTP_FROM` (required by the nodemailer mailer); `INNGEST_DEV=1` (enables the Inngest dev server for local email testing); `CONTACT_TO_EMAIL` (required — contact-message recipient); `NEXT_PUBLIC_SITE_URL` (required — canonical URL for sitemap/robots/SEO).
+- `.env*` is gitignored — local config lives in `.env` (or `.env.local`); `.env.example` is the tracked template. Next.js auto-loads `.env` for `dev`/`build`.
+- Env vars (validated in `src/lib/env.ts`): `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, `SMTP_FROM` (required by the nodemailer mailer); `INNGEST_DEV=1` (enables the Inngest dev server for local email testing); `CONTACT_TO_EMAIL` (required — contact-message recipient); `NEXT_PUBLIC_SITE_URL` (required — canonical URL for sitemap/robots/SEO). Either `INNGEST_DEV=1` or both `INNGEST_EVENT_KEY` and `INNGEST_SIGNING_KEY` must be set — the app refuses to start otherwise.
+- **CI build quirk**: `env.ts` throws at import time, so `next build` fails without valid-shaped env vars. The CI build job (`.github/workflows/ci.yml`) injects placeholder SMTP/email/URL values to satisfy this — keep them; do not "clean them up".
 - `pnpm-workspace.yaml` allows builds for `sharp` and `unrs-resolver`.
 - Vercel deploy lives outside the repo (not in CI).
