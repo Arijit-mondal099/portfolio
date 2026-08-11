@@ -137,7 +137,7 @@ pnpm dev                     # → http://localhost:3000
 
 ## 📁 Project Structure
 
-```
+```text
 src/
 ├── app/
 │   ├── api/
@@ -199,16 +199,16 @@ public/
 
 ## 📜 Scripts
 
-| Command             | Description                                   |
-| ------------------- | --------------------------------------------- |
-| `pnpm dev`          | Start the development server (port 3000)      |
-| `pnpm inngest`      | Run the Inngest dev server (local email flow) |
-| `pnpm build`        | Production build                              |
-| `pnpm start`        | Run the production build                      |
-| `pnpm lint`         | Run ESLint                                    |
-| `pnpm typecheck`    | Run TypeScript type checking (`tsc --noEmit`) |
-| `pnpm format`       | Format all files with Prettier                |
-| `pnpm format:check` | Check formatting (CI-friendly)                |
+| Command             | Description                                                                         |
+| ------------------- | ----------------------------------------------------------------------------------- |
+| `pnpm dev`          | Start the development server (port 3000)                                            |
+| `pnpm inngest`      | Run the Inngest dev server (local email flow) via `pnpm dlx inngest-cli@latest dev` |
+| `pnpm build`        | Production build                                                                    |
+| `pnpm start`        | Run the production build                                                            |
+| `pnpm lint`         | Run ESLint                                                                          |
+| `pnpm typecheck`    | Run TypeScript type checking (`tsc --noEmit`)                                       |
+| `pnpm format`       | Format all files with Prettier                                                      |
+| `pnpm format:check` | Check formatting (CI-friendly)                                                      |
 
 ## ☁️ Deployment
 

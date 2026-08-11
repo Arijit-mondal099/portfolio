@@ -9,7 +9,7 @@
   },
   "scripts": {
     "dev": "next dev",
-    "inngest": "npx inngest-cli@latest dev",
+    "inngest": "pnpm dlx inngest-cli@latest dev",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",

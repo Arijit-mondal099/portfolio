@@ -15,8 +15,11 @@ export const sendEmailProcess = inngest.createFunction(
     concurrency: {
       limit: 5,
     },
+    retries: 3,
   },
   async ({ event, step }) => {
+    // If sending the email fails, Inngest retries up to 3 times.
+    // Once a retry succeeds, Inngest stops retrying and returns the result.
     const result = await step.run("send-email", async () => {
       return await sendEmail(event.data as ContactInput);
     });
