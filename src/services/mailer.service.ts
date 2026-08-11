@@ -8,21 +8,24 @@ const SMTP_PASS = process.env.SMTP_PASS;
 const SMTP_FROM = process.env.SMTP_FROM;
 const CONTACT_TO_EMAIL = process.env.CONTACT_TO_EMAIL;
 
-if (!SMTP_HOST || !SMTP_PORT || !SMTP_USER || !SMTP_PASS || !SMTP_FROM) {
-  throw new Error("Oops mailer env not provided");
+function getTransporter() {
+  if (!SMTP_HOST || !SMTP_PORT || !SMTP_USER || !SMTP_PASS || !SMTP_FROM) {
+    throw new Error("Oops mailer env not provided");
+  }
+
+  return nodemailer.createTransport({
+    host: SMTP_HOST,
+    port: SMTP_PORT,
+    secure: SMTP_PORT === 465,
+    auth: {
+      user: SMTP_USER,
+      pass: SMTP_PASS,
+    },
+  });
 }
 
-const transporter = nodemailer.createTransport({
-  host: SMTP_HOST,
-  port: SMTP_PORT,
-  secure: SMTP_PORT === 465,
-  auth: {
-    user: SMTP_USER,
-    pass: SMTP_PASS,
-  },
-});
-
 export async function sendEmail(data: ContactInput): Promise<void> {
+  const transporter = getTransporter();
   await transporter.sendMail({
     from: SMTP_FROM,
     to: CONTACT_TO_EMAIL ?? SMTP_FROM,
