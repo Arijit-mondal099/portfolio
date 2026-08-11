@@ -7,7 +7,7 @@ import { Footer } from "@/components/layout/footer";
 import { LoadingGate } from "@/components/loading/loading-gate";
 import { SiteHeader } from "@/components/layout/site-header";
 import { Toaster } from "@/components/ui/sonner";
-import { siteUrl } from "@/lib/site";
+import { env } from "@/lib/env";
 import { Providers } from "./providers";
 
 /*
@@ -27,7 +27,7 @@ const description =
 
 export const metadata: Metadata = {
   // Resolves relative metadata URLs (including the generated OG image).
-  metadataBase: new URL(siteUrl),
+  metadataBase: new URL(env.NEXT_PUBLIC_SITE_URL),
   title: {
     default: title,
     template: "%s | Arijit Mondal",
@@ -72,13 +72,13 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
-    url: siteUrl,
+    url: env.NEXT_PUBLIC_SITE_URL,
     siteName: "Arijit Mondal",
     title,
     description,
     images: [
       {
-        url: `${siteUrl}/profile.png`,
+        url: `${env.NEXT_PUBLIC_SITE_URL}/profile.png`,
         width: 1200,
         height: 630,
         alt: "Arijit Mondal Portfolio",
@@ -91,7 +91,7 @@ export const metadata: Metadata = {
     description,
     creator: "@arijit_m_000999",
     site: "@arijit_m_000999",
-    images: [`${siteUrl}/profile.png`],
+    images: [`${env.NEXT_PUBLIC_SITE_URL}/profile.png`],
   },
 };
 

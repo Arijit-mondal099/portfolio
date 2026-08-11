@@ -25,7 +25,7 @@ export const sendEmailProcess = inngest.createFunction(
     });
 
     return {
-      message: `Email sended successfully, EventId: ${event.data.id}`,
+      message: `Email sent successfully, EventId: ${event.id}`,
       result,
     };
   }

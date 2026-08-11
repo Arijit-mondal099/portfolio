@@ -34,7 +34,7 @@ No test framework configured.
 - **JetBrains Mono** is the sole typeface (`--font-sans` and `--font-mono`).
 - **`cn()`** (`src/lib/utils.ts`) — `clsx` + `tailwind-merge`, used by all shadcn/ui components.
 - OG image at `src/app/opengraph-image.tsx` via `next/og`.
-- Site URL from `NEXT_PUBLIC_SITE_URL` env var, falls back to `https://arijit-mondal.vercel.app` (`src/lib/site.ts`).
+- Site URL from required `NEXT_PUBLIC_SITE_URL` env var, validated in `src/lib/env.ts`.
 
 ### Home section order
 
@@ -76,6 +76,6 @@ Runs automatically via `husky` on commit. Do not attempt `--no-verify` or amend:
 ## Environment
 
 - `.env*` is gitignored (`.env.local` for secrets); `.env.example` is tracked as the template.
-- Env vars: `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, `SMTP_FROM` (required by the nodemailer mailer); `INNGEST_DEV=1` (enables the Inngest dev server for local email testing); `CONTACT_TO_EMAIL` (overrides recipient, defaults to owner's email); `NEXT_PUBLIC_SITE_URL` (canonical URL for sitemap/robots/SEO, defaults to `https://arijit-mondal.vercel.app` — see `src/lib/site.ts`).
+- Env vars (validated in `src/lib/env.ts`): `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, `SMTP_FROM` (required by the nodemailer mailer); `INNGEST_DEV=1` (enables the Inngest dev server for local email testing); `CONTACT_TO_EMAIL` (required — contact-message recipient); `NEXT_PUBLIC_SITE_URL` (required — canonical URL for sitemap/robots/SEO).
 - `pnpm-workspace.yaml` allows builds for `sharp` and `unrs-resolver`.
 - Vercel deploy lives outside the repo (not in CI).
