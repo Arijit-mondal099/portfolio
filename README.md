@@ -6,16 +6,9 @@ A data-driven personal portfolio for **Arijit Mondal**, a full-stack developer
 building modern, scalable web applications with React, Next.js, TypeScript,
 Node.js, and AI-powered technologies.
 
-![Next.js 16](https://img.shields.io/badge/Next.js-16-000?logo=next.js)
-![React 19](https://img.shields.io/badge/React-19-58c4dc?logo=react)
+![Next.js](https://img.shields.io/badge/Next.js-16-000?logo=next.js)
+![React](https://img.shields.io/badge/React-19-58c4dc?logo=react)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-3178c6?logo=typescript)
-![Tailwind CSS v4](https://img.shields.io/badge/Tailwind_CSS-v4-06b6d4?logo=tailwindcss)
-![shadcn/ui](https://img.shields.io/badge/shadcn/ui-base--nova-000?logo=shadcnui)
-![motion](https://img.shields.io/badge/motion-v12-0055ff?logo=framer)
-![pnpm](https://img.shields.io/badge/pnpm-11.5.1-f69220?logo=pnpm)
-![ESLint](https://img.shields.io/badge/ESLint-9-4b32c3?logo=eslint)
-![Prettier](https://img.shields.io/badge/Prettier-3-f7b93e?logo=prettier)
-![Resend](https://img.shields.io/badge/Resend-000?logo=resend)
 
 </div>
 
@@ -36,7 +29,7 @@ Node.js, and AI-powered technologies.
 ## ✨ Features
 
 - 👤 **Hero + About** — Name, tagline, avatar, and bio with CTA links to contact
-  and resume download.
+  and a resume dialog that embeds the PDF.
 - 🎓 **Education & Experience** — Tabbed timeline component showing work history
   and academic background, each entry with date range, description, and tech
   tags.
@@ -47,12 +40,15 @@ Node.js, and AI-powered technologies.
 - 📊 **GitHub Contributions** — Yearly contribution heatmap fetched server-side
   through TanStack Query and proxied from the GitHub Contributions API.
 - 📬 **Contact Form** — Validated form (react-hook-form + Zod) that sends email
-  via the Resend API. Social links (GitHub, LinkedIn, X/Twitter, Email, Phone)
+  via nodemailer (SMTP) through Inngest. Social links (GitHub, LinkedIn, X/Twitter, Email, Phone)
   displayed alongside the form.
 - 🌓 **Dual Theme** — Light and dark mode with system preference detection and an
   animated circular-reveal transition via the View Transitions API.
 - 🎬 **Motion Animations** — Scroll-triggered reveals, staggered child entrances,
   auto-scrolling marquees, and route-transition fades powered by motion v12.
+- ⏳ **Loading Splash** — Full-viewport overlay that gates entrance animations until
+  dismissed, and is auto-skipped for returning visitors and reduced-motion users, so
+  scroll/route reveals never play behind it.
 - 🔍 **SEO** — Dynamic sitemap (`/sitemap.xml`), robots.txt, Open Graph image, and
   canonical metadata generated from data files.
 - 🤖 **AI Chatbot** — Embedded SupportAI chatbot on every page for interactive
@@ -96,7 +92,7 @@ Node.js, and AI-powered technologies.
 
 |             |                                                     |
 | ----------- | --------------------------------------------------- |
-| **Email**   | [Resend](https://resend.com/) (`POST /api/contact`) |
+| **Email**   | nodemailer (SMTP) via Inngest (`POST /api/contact`) |
 | **Chatbot** | SupportAI embedded script                           |
 
 ### 🔧 Tooling
@@ -128,20 +124,26 @@ pnpm dev                     # → http://localhost:3000
 
 ### 🔐 Environment Variables
 
-| Variable               | Required | Description                                                                                                             |
-| ---------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------- |
-| `RESEND_API_KEY`       | Yes      | Resend API key for the contact form (`/api/contact`). Create one at [resend.com/api-keys](https://resend.com/api-keys). |
-| `CONTACT_TO_EMAIL`     | No       | Recipient address for contact messages. Defaults to the owner's email.                                                  |
-| `NEXT_PUBLIC_SITE_URL` | No       | Canonical site URL — used by the sitemap, robots.txt, and SEO metadata.                                                 |
+| Variable               | Required | Description                                                                                   |
+| ---------------------- | -------- | --------------------------------------------------------------------------------------------- |
+| `SMTP_HOST`            | Yes      | SMTP server hostname for the contact form (`/api/contact`).                                   |
+| `SMTP_PORT`            | Yes      | SMTP server port (e.g. 587 or 465).                                                           |
+| `SMTP_USER`            | Yes      | SMTP authentication username.                                                                 |
+| `SMTP_PASS`            | Yes      | SMTP authentication password.                                                                 |
+| `SMTP_FROM`            | Yes      | Sender address for outgoing contact emails (nodemailer `from`).                               |
+| `INNGEST_DEV`          | No       | Set to `1` to enable the Inngest dev server for local email testing. Run with `pnpm inngest`. |
+| `CONTACT_TO_EMAIL`     | No       | Recipient address for contact messages; falls back to `SMTP_FROM` when unset.                 |
+| `NEXT_PUBLIC_SITE_URL` | No       | Canonical site URL — used by the sitemap, robots.txt, and SEO metadata.                       |
 
 ## 📁 Project Structure
 
-```
+```text
 src/
 ├── app/
 │   ├── api/
-│   │   ├── contact/          POST /api/contact (Resend email)
-│   │   └── contributions/    GET /api/contributions (GH heatmap proxy)
+│   │   ├── contact/          POST /api/contact (Inngest + nodemailer SMTP)
+│   │   ├── contributions/    GET /api/contributions (GH heatmap proxy)
+│   │   └── inngest/          GET/POST/PUT /api/inngest (Inngest functions webhook)
 │   ├── projects/             /projects — full project listing page
 │   ├── globals.css           Tailwind v4 theme + base styles
 │   ├── layout.tsx            Root layout (header, footer, providers, chatbot)
@@ -154,13 +156,15 @@ src/
 ├── components/
 │   ├── contact/              ContactForm component
 │   ├── layout/               SiteHeader, Footer, Section, SectionNav
+│   ├── loading/              LoadingScreen + LoadingGate (splash overlay)
 │   ├── motion/               Reveal, Stagger, Marquee animation wrappers
-│   ├── projects/             ProjectGrid (shared card grid)
+│   ├── projects/             ProjectCard + ProjectGrid (shared card grid)
 │   ├── sections/             Hero, About, Skills, Projects, Contributions,
 │   │                         Contact, EducationExperience
 │   ├── theme/                ThemeToggle
 │   ├── timeline/             Timeline component
-│   └── ui/                   shadcn/ui primitives (button, card, dialog, …)
+│   ├── ui/                   shadcn/ui primitives (button, card, dialog, …)
+│   └── resume-dialog.tsx     Resume modal (embedded PDF preview)
 ├── data/
 │   ├── profile.ts            Name, tagline, bio, avatar, resume link
 │   ├── projects.ts           Project list (title, desc, image, demo/source URLs)
@@ -168,15 +172,22 @@ src/
 │   ├── socials.ts            Contact links (GitHub, LinkedIn, X, Email, Phone)
 │   ├── timeline.ts           Experience + education entries
 │   └── github.ts             GitHub username
-└── lib/
-    ├── date.ts               Date formatting helpers
-    ├── motion.ts             Shared animation constants and variants
-    ├── site.ts               Canonical site URL
-    ├── utils.ts              cn() utility (clsx + tailwind-merge)
-    └── validations.ts        Zod schema for the contact form
+├── inngest/
+│   ├── client.ts             Inngest client
+│   └── functions.ts          sendEmailProcess (triggered by app/email.send)
+├── lib/
+│   ├── date.ts               Date formatting helpers
+│   ├── motion.ts             Shared animation constants and variants
+│   ├── site.ts               Canonical site URL
+│   ├── utils.ts              cn() utility (clsx + tailwind-merge)
+│   └── validations.ts        Zod schema for the contact form
+└── services/
+    └── mailer.service.ts     nodemailer SMTP transporter + sendEmail
 
 public/
+├── demo.png                  README demo screenshot
 ├── favicon.png
+├── loading.gif               Loading splash animation
 ├── profile.png               Avatar image
 ├── resume.pdf                Downloadable resume
 ├── logos/                    Institution/company logos (3)
@@ -188,15 +199,16 @@ public/
 
 ## 📜 Scripts
 
-| Command             | Description                                   |
-| ------------------- | --------------------------------------------- |
-| `pnpm dev`          | Start the development server (port 3000)      |
-| `pnpm build`        | Production build                              |
-| `pnpm start`        | Run the production build                      |
-| `pnpm lint`         | Run ESLint                                    |
-| `pnpm typecheck`    | Run TypeScript type checking (`tsc --noEmit`) |
-| `pnpm format`       | Format all files with Prettier                |
-| `pnpm format:check` | Check formatting (CI-friendly)                |
+| Command             | Description                                                                         |
+| ------------------- | ----------------------------------------------------------------------------------- |
+| `pnpm dev`          | Start the development server (port 3000)                                            |
+| `pnpm inngest`      | Run the Inngest dev server (local email flow) via `pnpm dlx inngest-cli@latest dev` |
+| `pnpm build`        | Production build                                                                    |
+| `pnpm start`        | Run the production build                                                            |
+| `pnpm lint`         | Run ESLint                                                                          |
+| `pnpm typecheck`    | Run TypeScript type checking (`tsc --noEmit`)                                       |
+| `pnpm format`       | Format all files with Prettier                                                      |
+| `pnpm format:check` | Check formatting (CI-friendly)                                                      |
 
 ## ☁️ Deployment
 
@@ -205,8 +217,9 @@ The project builds with `pnpm build` and is ready for deployment on
 
 1. 📤 Push the repository to GitHub.
 2. 📥 Import the repo into Vercel.
-3. 🔑 Set the three environment variables (`RESEND_API_KEY`, `CONTACT_TO_EMAIL`,
-   `NEXT_PUBLIC_SITE_URL`) in the Vercel dashboard.
+3. 🔑 Set the environment variables (`SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`,
+   `SMTP_PASS`, `SMTP_FROM`, `CONTACT_TO_EMAIL`, `NEXT_PUBLIC_SITE_URL`) in the
+   Vercel dashboard.
 4. 🚀 Deploy.
 
 > **TODO:** A live demo URL is not confirmed. The canonical site URL defaults

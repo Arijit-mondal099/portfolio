@@ -3,5 +3,6 @@
 # explicitly so installs don't fail: `sharp` powers next/image optimization,
 # `unrs-resolver` backs the ESLint TypeScript import resolver.
 allowBuilds:
+  protobufjs: false
   sharp: true
   unrs-resolver: true

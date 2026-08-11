@@ -42,7 +42,7 @@ Hero → About → Education & Experience (tabbed timeline) → Skills → Proje
 
 ## Key dependencies
 
-- **Resend** — contact form via `POST /api/contact`. Requires `RESEND_API_KEY`. `CONTACT_TO_EMAIL` overrides recipient.
+- **Inngest** — contact form events flow: `POST /api/contact` → Inngest → `sendEmailProcess` in `src/inngest/functions.ts` → `sendEmail` in `src/services/mailer.service.ts` (nodemailer over SMTP). Run the Inngest dev server with `pnpm inngest` (needs `INNGEST_DEV` key).
 - **TanStack Query** — contributions fetch + contact mutation. Provider in `src/app/providers.tsx`.
 - **react-hook-form** + **Zod** (`@hookform/resolvers`) — shared schema at `src/lib/validations.ts`.
 - **sonner** — toast notifications for contact form feedback.
@@ -76,6 +76,6 @@ Runs automatically via `husky` on commit. Do not attempt `--no-verify` or amend:
 ## Environment
 
 - `.env*` is gitignored (`.env.local` for secrets); `.env.example` is tracked as the template.
-- Three variables documented in `.env.example`: `RESEND_API_KEY`, `CONTACT_TO_EMAIL`, `NEXT_PUBLIC_SITE_URL`.
+- Env vars: `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, `SMTP_FROM` (required by the nodemailer mailer); `INNGEST_DEV=1` (enables the Inngest dev server for local email testing); `CONTACT_TO_EMAIL` (overrides recipient, defaults to owner's email); `NEXT_PUBLIC_SITE_URL` (canonical URL for sitemap/robots/SEO, defaults to `https://arijit-mondal.vercel.app` — see `src/lib/site.ts`).
 - `pnpm-workspace.yaml` allows builds for `sharp` and `unrs-resolver`.
 - Vercel deploy lives outside the repo (not in CI).
