@@ -21,7 +21,7 @@ import {
   SiPostgresql,
   SiPostman,
   SiPrisma,
-  // SiPython,
+  SiPython,
   SiReact,
   SiRedux,
   SiShadcnui,
@@ -59,7 +59,7 @@ export const skillGroups: SkillGroup[] = [
       { name: "C++", icon: SiCplusplus },
       { name: "JavaScript", icon: SiJavascript },
       { name: "TypeScript", icon: SiTypescript },
-      // { name: "Python", icon: SiPython },
+      { name: "Python", icon: SiPython },
     ],
   },
   {
