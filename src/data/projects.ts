@@ -28,10 +28,18 @@ export const projects: Project[] = [
     sourceUrl: "https://github.com/Arijit-mondal099/supportai",
   },
   {
+    title: "Vibe",
+    description:
+      "Build apps and websites by chatting with AI. Describe, build, preview, and ship working apps with full source code.",
+    image: "/projects/project-2.png",
+    demoUrl: "https://vibe-eight-indol.vercel.app",
+    sourceUrl: "https://github.com/Arijit-mondal099/vibe",
+  },
+  {
     title: "Health",
     description:
       "Full-stack doctor appointment booking system with role-based dashboards, JWT auth, and Razorpay payment integration.",
-    image: "/projects/project-2.png",
+    image: "/projects/project-3.png",
     demoUrl: "https://health-blond-tau.vercel.app",
     sourceUrl: "https://github.com/Arijit-mondal099/health",
   },
@@ -39,7 +47,7 @@ export const projects: Project[] = [
     title: "Docsy",
     description:
       "Chat with your PDFs using AI — RAG-powered document Q&A with GPT-4o, Gemini, and Pinecone vector search.",
-    image: "/projects/project-3.png",
+    image: "/projects/project-4.png",
     demoUrl: "https://docsy-olive.vercel.app",
     sourceUrl: "https://github.com/Arijit-mondal099/docsy",
   },
@@ -47,7 +55,7 @@ export const projects: Project[] = [
     title: "Folio",
     description:
       "AI-powered note app with inline AI transforms, a chat assistant, and export to PDF, Word, and Markdown.",
-    image: "/projects/project-4.png",
+    image: "/projects/project-5.png",
     demoUrl: "https://folio-beryl-delta.vercel.app",
     sourceUrl: "https://github.com/Arijit-mondal099/folio",
   },
@@ -55,16 +63,8 @@ export const projects: Project[] = [
     title: "ZenoCart",
     description:
       "Full-stack e-commerce platform with Razorpay payments, JWT auth, and an admin dashboard for orders and products.",
-    image: "/projects/project-5.png",
+    image: "/projects/project-6.png",
     demoUrl: "https://zenocart.onrender.com",
     sourceUrl: "https://github.com/Arijit-mondal099/zenocart",
-  },
-  {
-    title: "TaskPilot",
-    description:
-      "Task management app with a React dashboard, JWT authentication, and MongoDB-backed data persistence.",
-    image: "/projects/project-6.png",
-    demoUrl: "https://taskpilot-6i8g.onrender.com",
-    sourceUrl: "https://github.com/Arijit-mondal099/taskPilot",
   },
 ];
