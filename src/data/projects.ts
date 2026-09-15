@@ -36,10 +36,18 @@ export const projects: Project[] = [
     sourceUrl: "https://github.com/Arijit-mondal099/vibe",
   },
   {
+    title: "Ghost AI",
+    description:
+      "AI-powered workspace to design system architectures on a shared canvas, collaborate live, refine, and export specs.",
+    image: "/projects/project-3.png",
+    demoUrl: "https://ghostai-rouge.vercel.app",
+    sourceUrl: "https://github.com/Arijit-mondal099/ghost-ai",
+  },
+  {
     title: "Health",
     description:
       "Full-stack doctor appointment booking system with role-based dashboards, JWT auth, and Razorpay payment integration.",
-    image: "/projects/project-3.png",
+    image: "/projects/project-4.png",
     demoUrl: "https://health-blond-tau.vercel.app",
     sourceUrl: "https://github.com/Arijit-mondal099/health",
   },
