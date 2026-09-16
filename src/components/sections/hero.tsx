@@ -3,7 +3,9 @@
 import { Mail } from "lucide-react";
 import { motion } from "motion/react";
 import Image from "next/image";
+import { useTheme } from "next-themes";
 
+import { changeThemeWithReveal } from "@/components/theme/theme-toggle";
 import { useLoadingGate } from "@/components/loading/loading-gate";
 import { ResumeDialog } from "@/components/resume-dialog";
 import { buttonVariants } from "@/components/ui/button";
@@ -25,6 +27,9 @@ import { cn } from "@/lib/utils";
  */
 export function Hero() {
   const { done } = useLoadingGate();
+  const { resolvedTheme, setTheme } = useTheme();
+
+  const isDark = resolvedTheme === "dark";
 
   return (
     <motion.section
@@ -63,7 +68,17 @@ export function Hero() {
         </motion.div>
       </div>
 
-      <motion.div variants={staggerItem}>
+      <motion.div
+        variants={staggerItem}
+        onClick={() =>
+          changeThemeWithReveal(() => setTheme(isDark ? "light" : "dark"))
+        }
+        whileTap={{
+          scale: 0.95,
+          animation: "spring",
+        }}
+        className="cursor-pointer"
+      >
         <Image
           src={profile.avatar.src}
           alt={profile.avatar.alt}
