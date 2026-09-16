@@ -69,6 +69,9 @@ export function Hero() {
       </div>
 
       <motion.button
+        type="button"
+        aria-label="Toggle theme"
+        className="cursor-pointer"
         variants={staggerItem}
         onClick={() =>
           changeThemeWithReveal(() => setTheme(isDark ? "light" : "dark"))
@@ -77,7 +80,6 @@ export function Hero() {
           scale: 0.95,
           animation: "spring",
         }}
-        className="cursor-pointer"
       >
         <Image
           src={profile.avatar.src}
