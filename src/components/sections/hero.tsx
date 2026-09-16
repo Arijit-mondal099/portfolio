@@ -68,7 +68,7 @@ export function Hero() {
         </motion.div>
       </div>
 
-      <motion.div
+      <motion.button
         variants={staggerItem}
         onClick={() =>
           changeThemeWithReveal(() => setTheme(isDark ? "light" : "dark"))
@@ -87,7 +87,7 @@ export function Hero() {
           priority
           className="size-36 rounded-xl border border-border object-cover object-top"
         />
-      </motion.div>
+      </motion.button>
     </motion.section>
   );
 }
