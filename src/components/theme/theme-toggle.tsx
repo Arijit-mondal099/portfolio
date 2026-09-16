@@ -32,7 +32,7 @@ type ViewTransitionDocument = Document & {
  * Falls back to an instant swap when the API is unavailable (e.g. Firefox) or
  * the user prefers reduced motion.
  */
-function changeThemeWithReveal(apply: () => void) {
+export function changeThemeWithReveal(apply: () => void) {
   const doc = document as ViewTransitionDocument;
   const prefersReduced = window.matchMedia(
     "(prefers-reduced-motion: reduce)"
