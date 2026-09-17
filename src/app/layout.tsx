@@ -106,7 +106,9 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${jetbrainsMono.variable} h-full motion-safe:scroll-smooth`}
+      // No `scroll-smooth` here: Lenis owns smoothing (a CSS
+      // `scroll-behavior: smooth` would fight its per-frame scroll updates).
+      className={`${jetbrainsMono.variable} h-full`}
     >
       <body className="flex min-h-full flex-col">
         {/* First-paint theme hint: set the light/dark class before hydration so
