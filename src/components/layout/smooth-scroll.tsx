@@ -12,6 +12,11 @@ import "lenis/dist/lenis.css";
  *   through `lenis.scrollTo`, which honors each section's `scroll-mt-*`
  *   (scroll-margin) — anchor offsets keep working, now animated.
  * - `lerp` 0.1 is the classic buttery feel; lower = heavier/smoother.
+ * - `stopInertiaOnNavigate` kills any in-flight scroll animation when an
+ *   internal link changes route (`/` ↔ `/projects` via `next/link`), so the
+ *   new page can't inherit the previous route's scroll momentum. The root
+ *   instance lives in the persistent layout and would otherwise survive the
+ *   navigation.
  *
  * Accessibility: Lenis honors `prefers-reduced-motion` by default (smoothing
  * off, programmatic scrolls jump instantly), matching the global
@@ -24,6 +29,7 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
       options={{
         autoRaf: true,
         anchors: true,
+        stopInertiaOnNavigate: true,
         lerp: 0.1,
       }}
     >
