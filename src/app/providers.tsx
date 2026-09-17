@@ -8,6 +8,8 @@ import {
 import { MotionConfig } from "motion/react";
 import { ThemeProvider } from "next-themes";
 
+import { SmoothScroll } from "@/components/layout/smooth-scroll";
+
 /**
  * TanStack Query setup for the App Router.
  *
@@ -55,7 +57,10 @@ export function Providers({ children }: { children: React.ReactNode }) {
             `prefers-reduced-motion: reduce` while keeping opacity, so every
             motion primitive degrades to a quiet fade with no per-component
             handling. MotionConfig renders no DOM, so the layout is unaffected. */}
-        <MotionConfig reducedMotion="user">{children}</MotionConfig>
+        <MotionConfig reducedMotion="user">
+          {/* Lenis smooth scroll (root instance, renders no DOM). */}
+          <SmoothScroll>{children}</SmoothScroll>
+        </MotionConfig>
       </QueryClientProvider>
     </ThemeProvider>
   );
