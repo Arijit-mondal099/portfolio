@@ -13,7 +13,7 @@ Node.js, and AI-powered technologies.
 </div>
 
 <div align="center">
-  <img src="./public/demo.png" alt="Portfolio Demo" width="700" />
+  <img src="./docs/demo.png" alt="Portfolio Demo" width="700" />
 </div>
 
 ## 📑 Table of Contents
