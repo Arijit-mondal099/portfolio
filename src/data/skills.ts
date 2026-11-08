@@ -1,6 +1,6 @@
 import type { IconType } from "react-icons";
 import { FaAws } from "react-icons/fa6";
-import { LuDatabase, LuNetwork } from "react-icons/lu";
+import { LuDatabase, LuNetwork, LuTable, LuHistory } from "react-icons/lu";
 import {
   SiCplusplus,
   SiCss,
@@ -33,6 +33,9 @@ import {
   SiClaude,
   SiModelcontextprotocol,
   SiLangchain,
+  SiFastapi,
+  SiPydantic,
+  SiSqlalchemy,
 } from "react-icons/si";
 
 /**
@@ -89,6 +92,11 @@ export const skillGroups: SkillGroup[] = [
       { name: "JWT Auth", icon: SiJsonwebtokens },
       { name: "MCP", icon: SiModelcontextprotocol },
       { name: "LangChain", icon: SiLangchain },
+      { name: "FastAPI", icon: SiFastapi },
+      { name: "Pydantic", icon: SiPydantic },
+      { name: "SQLAlchemy", icon: SiSqlalchemy },
+      { name: "SQLModel", icon: LuTable },
+      { name: "Alembic", icon: LuHistory },
     ],
   },
   {
